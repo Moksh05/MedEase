@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/currentmed_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardCornerRadius="15dp"
+    android:elevation="5dp"
+    android:padding="10dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:weightSum="7"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/image_textview"
+            android:layout_width="0dp"
+            android:layout_weight="1.9"
+            android:layout_marginRight="5dp"
+            android:layout_height="100dp"
+            android:background="@drawable/blue_light_background"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="IN"
+            android:textSize="70dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary_blue">
+        </TextView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5.1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="Medicine name">
+            </TextView>
+
+            <TextView
+                android:id="@+id/dose_and_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="5dp"
+                android:text="Dose : N | Till : N Days">
+            </TextView>
+
+            <TextView
+                android:id="@+id/intruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp"
+                android:text="After Meal">
+            </TextView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MedEase</string>
+    <string name="login">LOGIN</string>
+    <string name="username_hint">Email</string>
+    <string name="password_hint">Passsword</string>
+    <string name="signup"> Sign Up</string>
+    <string name="or"> OR </string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="new_user">New User? </string>
+    <string name="web_client_id">837387101822-f9ft50nklev7of9savgk5s9p6o0krlpu.apps.googleusercontent.com</string>
+    <string name="Maps_api_key">AIzaSyD6wmB0p2ZZ6-O0LcPIDEbfPIwF6xQUWJg</string>
+    <string name="Email_hint">Username</string>
+    <string name="signin">Sign In</string>
+    <string name="Existing_user">Existing User? </string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="opn">Open Nav Menu</string>
+    <string name="cln">Close Nav Menu</string>
+
+
+</resources>

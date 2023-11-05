@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#4DCEE8FB"
+    android:layout_marginTop="?attr/actionBarSize"
+    tools:context=".AppointmentFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/appointment_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/searchbar"
+        android:backgroundTint="@color/white"
+        android:elevation="3dp"
+        android:padding="10dp"
+        app:iconifiedByDefault="true"
+        app:queryHint="Search Medicine">
+    </androidx.appcompat.widget.SearchView>
+
+
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/suggestion_recyclerveiw"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_marginLeft="5dp"-->
+    <!--        android:layout_marginRight="5dp"-->
+    <!--        tools:listitem="@layout/search_suggestion"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_below="@+id/medication_searchbar">-->
+    <!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/appointment_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+
+        tools:listitem="@layout/scheduled_appointment_item"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appointment_searchbar"></androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_appointment_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Schedule Appointment"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:backgroundTint="@color/colorPrimary_blue"></com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
+
+</RelativeLayout>

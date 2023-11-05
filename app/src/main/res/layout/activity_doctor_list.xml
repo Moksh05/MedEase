@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="vertical"
+    tools:context=".DoctorListActivity">
+
+    <ImageView
+        android:id="@+id/back_button_medication"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/back_background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back_arrow"
+        app:tint="#9B9B9B"></ImageView>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/appointment_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/searchbar"
+        android:backgroundTint="@color/white"
+        android:elevation="3dp"
+        android:padding="10dp"
+        app:iconifiedByDefault="true"
+        app:queryHint="Search Medicine">
+    </androidx.appcompat.widget.SearchView>
+
+
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/suggestion_recyclerveiw"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_marginLeft="5dp"-->
+    <!--        android:layout_marginRight="5dp"-->
+    <!--        tools:listitem="@layout/search_suggestion"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_below="@+id/medication_searchbar">-->
+    <!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/doctorlist_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+
+        tools:listitem="@layout/appointment_item"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appointment_searchbar"></androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

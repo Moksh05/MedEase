@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appointment_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="3dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    app:cardCornerRadius="5dp"
+    android:elevation="5dp"
+    android:padding="10dp">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="7">
+
+            <TextView
+                android:id="@+id/image_textview"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1.9"
+                android:background="@drawable/blue_light_background"
+                android:gravity="center"
+                android:text="DN"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary_blue"
+                android:textSize="70dp"
+                android:textStyle="bold"></TextView>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="5.1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Doctor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Doctors name"
+                    android:textSize="25dp"></TextView>
+
+                <TextView
+                    android:id="@+id/Specialisation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Specialistation"
+                    android:textSize="20dp"></TextView>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icon_medrecords"
+                        app:tint = "#6C6B6B"></ImageView>
+
+                    <TextView
+                        android:id="@+id/clinic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="After Meal"
+                        android:textSize="17dp"></TextView>
+
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:id="@+id/experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="3 years of experience"
+            android:layout_marginTop="2dp"
+            android:textSize="17dp"></TextView>
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Near shiv chowk , Sahibabad , Ghaziabad"
+            android:maxLines="2"
+            android:layout_marginTop="2dp"
+            android:textSize="17dp"></TextView>
+
+
+        <TextView
+            android:id="@+id/SHeduled_Booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Offline Appointment on WED 22:00 PM "
+            android:maxLines="2"
+            android:layout_marginTop="2dp"
+            android:textColor="#05C50D"
+            android:visibility="gone"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Consultation Fee : 500/- "
+            android:maxLines="2"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:padding="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:weightSum="9"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="0dp"
+                android:id="@+id/online_consult_button"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.4"
+                android:text="Book Online Consult"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+
+                android:textSize="15dp"
+                android:backgroundTint="#0CA4EA"></com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"></View>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="0dp"
+                android:id="@+id/Book_clinic_button"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.4"
+                android:text="Book Clinic Visit"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:backgroundTint="#9C0CEA"></com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

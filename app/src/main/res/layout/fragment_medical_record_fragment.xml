@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MedicalRecord_fragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/medrec_recyclerview"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/med_rec_item">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_medical_record_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="27dp"
+        android:backgroundTint="@color/colorPrimary_blue"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/icon_add"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+</RelativeLayout>

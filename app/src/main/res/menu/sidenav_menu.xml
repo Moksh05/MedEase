@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" android:visible="true">
+        <item android:visible="true"
+            android:title="Home"
+            android:id="@+id/menu_home"
+            android:icon="@drawable/icon_home">
+        </item>
+        <item android:visible="true"
+            android:title="Appointments"
+            android:id="@+id/menu_appointments"
+            android:icon="@drawable/icon_appointment">
+        </item>
+        <item android:title="Medications"
+            android:id="@+id/menu_medication"
+            android:icon="@drawable/icon_medication">
+        </item>
+        <item android:title="Telemedicine"
+            android:id="@+id/menu_Telemedicine"
+            android:icon="@drawable/icon_telemedicine">
+        </item>
+        <item android:title="Find Medical Services"
+            android:id="@+id/menu_find_med_fac"
+            android:icon="@drawable/icon_findplaces">
+        </item>
+        <item android:title="Symptom Checker"
+            android:id="@+id/menu_symptom_checker"
+            android:icon="@drawable/icon_symptomchecker">
+        </item>
+        <item android:title="Medical Records"
+            android:id="@+id/menu_medrec"
+            android:icon="@drawable/icon_medrecords">
+        </item>
+        <item android:title="News"
+            android:id="@+id/menu_News"
+            android:icon="@drawable/icon_news">
+        </item>
+        <item android:title=""
+            android:checkable="false"></item>
+
+    </group>
+<item android:title="Contact Us">
+    <menu >
+
+        <item
+            android:icon="@drawable/icon_help"
+            android:title="Help Centre"
+            android:id="@+id/menu_help">
+        </item>
+
+        <item android:title="LogOUt"
+            android:id="@+id/menu_logout"
+            android:icon="@drawable/icon_logout">
+        </item>
+
+    </menu>
+</item>
+</menu>
