@@ -52,7 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Full Name"
-
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@id/Email"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Email"
-
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@id/Phone_no"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -80,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Phone No"
+                    android:imeOptions="actionDone"
 
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -284,18 +287,21 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
                 android:id="@+id/Book_appointment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:padding="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
+                android:translationZ="0dp"
+                android:elevation="0dp"
                 android:text="Schedule Appointment"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                app:backgroundTint="@color/colorPrimary_blue"></com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+                app:backgroundTint="@color/colorPrimary_blue"/>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,16 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medease.Modal.MedRec
 import com.example.medease.R
 import com.example.medease.add_edit_medrec
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
+
 
 
 class medrecAdapter(val medreclist: MutableList<MedRec>) : RecyclerView.Adapter<medrecAdapter.medrecViewHolder>() {
 
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+    val collRef = db.collection("Users").document(auth.currentUser?.email.toString()).collection("Medical Records")
+    var storageref= FirebaseStorage.getInstance()
     inner class medrecViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val selectedmedrec = view.findViewById<CardView>(R.id.medrecitem_layout)
         val tittle = view.findViewById<TextView>(R.id.medrec_tittle)
@@ -46,6 +56,43 @@ class medrecAdapter(val medreclist: MutableList<MedRec>) : RecyclerView.Adapter<
             val intent = Intent(holder.selectedmedrec.context,add_edit_medrec::class.java)
             intent.putExtra("SELECTED_MEDREC",selectedMedRecJson)
             holder.selectedmedrec.context.startActivity(intent)
+        }
+
+        holder.selectedmedrec.setOnLongClickListener {
+            val medData = medreclist[position]
+
+            // Create a confirmation dialog using AlertDialog
+            val builder = AlertDialog.Builder(holder.selectedmedrec.context)
+            builder.setTitle("Confirmation")
+            builder.setMessage("Are you sure you want to delete this medication?")
+            builder.setPositiveButton("Yes") { _, _ ->
+                // Handle the delete confirmation
+                // Perform the actual delete operation (e.g., from Firebase Firestore)
+                collRef.document(medData.Tittle).delete().addOnSuccessListener {
+                    Toast.makeText(holder.selectedmedrec.context, "Record Deleted", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener {
+                    Toast.makeText(holder.selectedmedrec.context, "Failed to delete record", Toast.LENGTH_SHORT).show()
+                }
+                if (medreclist[position].fileurl!=null){
+                    storageref.getReferenceFromUrl(medreclist[position].fileurl).delete().addOnSuccessListener {
+                        Toast.makeText(holder.selectedmedrec.context, "record pdf deleted Deleted", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {
+                        Toast.makeText(holder.selectedmedrec.context, "failed to delete record pdf", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
+
+
+                medreclist.removeAt(position)
+                notifyItemRemoved(position)
+            }
+            builder.setNegativeButton("No") { _, _ ->
+                // Do nothing or dismiss the dialog
+            }
+            builder.show()
+
+            true
         }
     }
 

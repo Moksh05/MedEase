@@ -28,6 +28,8 @@ class addedit_medication : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     val collRef = db.collection("Users").document(auth.currentUser?.email.toString())
         .collection("Medications")
+    val historycollRef = db.collection("Users").document(auth.currentUser?.email.toString())
+        .collection("Medicine History")
 
     private lateinit var binding: ActivityAddeditMedicationBinding
     var selectedtimes = mutableListOf<String>()
@@ -124,6 +126,14 @@ class addedit_medication : AppCompatActivity() {
                     finish()
                 }.addOnFailureListener { e ->
                     Toast.makeText(this, "task failed  $e", Toast.LENGTH_LONG).show()
+                }
+
+            historycollRef.document("${binding.MedicineName.text.toString().trim()}-${binding.numberodDays.text.toString().trim()} days").set(data)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Medication Hisstory added succesfully", Toast.LENGTH_LONG).show()
+                    finish()
+                }.addOnFailureListener { e ->
+                    Toast.makeText(this, "history addition failed  $e", Toast.LENGTH_LONG).show()
                 }
 
         }

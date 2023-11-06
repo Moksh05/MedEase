@@ -81,7 +81,9 @@ class Medication_fragment : Fragment() {
                     Log.d("MedicationCrash","working till 79 $currentMedList")
                 }
             }
-            currentmedRecyclerView.adapter = CurrentMEdAdapter(currentMedList)
+            var adapter= CurrentMEdAdapter(currentMedList)
+            currentmedRecyclerView.adapter = adapter
+
         }.addOnFailureListener { e->
             Toast.makeText(requireActivity(),"Failure of task $e",Toast.LENGTH_LONG).show()
         }
