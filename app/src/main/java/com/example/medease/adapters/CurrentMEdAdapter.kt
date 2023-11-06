@@ -22,7 +22,7 @@ val auth = FirebaseAuth.getInstance()
 val collRef =
     db.collection("Users").document(auth.currentUser?.email.toString()).collection("Medications")
 
-class CurrentMEdAdapter(val CurrentMedList: MutableList<currentmed>) :
+class CurrentMEdAdapter(val CurrentMedList: MutableList<currentmed>,val deleteable:Boolean) :
     RecyclerView.Adapter<CurrentMEdAdapter.currentmedViewHolder>() {
 
     var MedList = mutableListOf<currentmed>()
@@ -67,33 +67,38 @@ class CurrentMEdAdapter(val CurrentMedList: MutableList<currentmed>) :
             val jsondata = Gson().toJson(medData)
             val intent = Intent(holder.selectedMed.context, addedit_medication::class.java)
             intent.putExtra("SELECTED_MED", jsondata)
+            intent.putExtra("EDITABLE",deleteable)
             holder.selectedMed.context.startActivity(intent)
         }
 
 
         holder.selectedMed.setOnLongClickListener {
-            val medData = CurrentMedList[position]
+          if (deleteable){
+              val medData = CurrentMedList[position]
 
-            // Create a confirmation dialog using AlertDialog
-            val builder = AlertDialog.Builder(holder.selectedMed.context)
-            builder.setTitle("Confirmation")
-            builder.setMessage("Are you sure you want to delete this medication?")
-            builder.setPositiveButton("Yes") { _, _ ->
-                // Handle the delete confirmation
-                // Perform the actual delete operation (e.g., from Firebase Firestore)
-                collRef.document(medData.MedName).delete().addOnSuccessListener {
-                    Toast.makeText(holder.selectedMed.context, "Record Deleted", Toast.LENGTH_SHORT).show()
-                }.addOnFailureListener {
-                    Toast.makeText(holder.selectedMed.context, "Failed to delete record", Toast.LENGTH_SHORT).show()
-                }
+              // Create a confirmation dialog using AlertDialog
+              val builder = AlertDialog.Builder(holder.selectedMed.context)
+              builder.setTitle("Confirmation")
+              builder.setMessage("Are you sure you want to delete this medication?")
+              builder.setPositiveButton("Yes") { _, _ ->
+                  // Handle the delete confirmation
+                  // Perform the actual delete operation (e.g., from Firebase Firestore)
+                  collRef.document(medData.MedName).delete().addOnSuccessListener {
+                      Toast.makeText(holder.selectedMed.context, "Record Deleted", Toast.LENGTH_SHORT).show()
+                  }.addOnFailureListener {
+                      Toast.makeText(holder.selectedMed.context, "Failed to delete record", Toast.LENGTH_SHORT).show()
+                  }
 
-                CurrentMedList.removeAt(position)
-                notifyItemRemoved(position)
-            }
-            builder.setNegativeButton("No") { _, _ ->
-                // Do nothing or dismiss the dialog
-            }
-            builder.show()
+                  CurrentMedList.removeAt(position)
+                  notifyItemRemoved(position)
+              }
+              builder.setNegativeButton("No") { _, _ ->
+                  // Do nothing or dismiss the dialog
+              }
+              builder.show()
+          }else{
+              Toast.makeText(holder.selectedMed.context, "Cannot edit history", Toast.LENGTH_SHORT).show()
+          }
 
             true
         }

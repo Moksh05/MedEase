@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -53,7 +54,11 @@ class Medication_fragment : Fragment() {
             startActivity(Intent(requireActivity(),addedit_medication::class.java))
         }
 
-
+        view.findViewById<ImageView>(R.id.history).setOnClickListener {
+            val intent = Intent(requireActivity(),History::class.java)
+            intent.putExtra("HISTORY_TYPE","Medication")
+            startActivity(intent)
+        }
 
 
 
@@ -81,7 +86,7 @@ class Medication_fragment : Fragment() {
                     Log.d("MedicationCrash","working till 79 $currentMedList")
                 }
             }
-            var adapter= CurrentMEdAdapter(currentMedList)
+            var adapter= CurrentMEdAdapter(currentMedList,true)
             currentmedRecyclerView.adapter = adapter
 
         }.addOnFailureListener { e->

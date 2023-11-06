@@ -33,13 +33,15 @@ class add_edit_medrec : AppCompatActivity() {
     private lateinit var uri:Uri
     val auth = FirebaseAuth.getInstance()
     val db = FirebaseFirestore.getInstance()
+    val MedrecHisCollref = db.collection("Users").document(auth.currentUser?.email.toString())
+        .collection("MedRec History")
     var storageref= FirebaseStorage.getInstance().reference.child("Medical Records").child(auth.currentUser?.email.toString())
     private lateinit var  launcher : ActivityResultLauncher<Intent>
     val collRef = db.collection("Users").document(auth.currentUser?.email.toString()).collection("Medical Records")
 
     private lateinit var displayName:String
     private lateinit var downloadUrl:String
-
+var editable= true
     var downloaded = 0
 
     @SuppressLint("Range")
@@ -58,28 +60,77 @@ class add_edit_medrec : AppCompatActivity() {
             val gson = Gson()
             val MedRECInfo = gson.fromJson(selectedMedrecJson,MedRec::class.java)
 
-            binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
-            binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
-            binding.attachmentPreview.setText(MedRECInfo.fileName)
-            binding.attachmentview.visibility = View.VISIBLE
+            if (intent.getBooleanExtra("EDITABLE",true)){
 
-            binding.attachmentview.setOnClickListener {
-                val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-                val duri= Uri.parse(MedRECInfo.fileurl)
 
-               if (downloaded ==0){
-                   downloaded=1
-                   val request = DownloadManager.Request(duri)
-                   request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,MedRECInfo.fileName)
-                   request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
+                binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
+                binding.attachmentPreview.setText(MedRECInfo.fileName)
+                binding.attachmentview.visibility = View.VISIBLE
 
-                   downloadManager.enqueue(request)
-               }else{
-                   Toast.makeText(this,"ALready downloaded",Toast.LENGTH_SHORT).show()
-               }
+                binding.attachmentview.setOnClickListener {
+                    val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                    val duri= Uri.parse(MedRECInfo.fileurl)
+
+                    if (downloaded ==0){
+                        downloaded=1
+                        val request = DownloadManager.Request(duri)
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,MedRECInfo.fileName)
+                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+                        downloadManager.enqueue(request)
+                    }else{
+                        Toast.makeText(this,"ALready downloaded",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                binding.doneButtonMedrec.setOnClickListener {
+                    if (taskOngoing == 0){
+                        onBackPressed()
+                    }else{
+                        Toast.makeText(this,"Please wait the task is being done",Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+                binding.attachMedicalRecordButton.setOnClickListener {
+                    showfile()
+                }
+
+                binding.backButtonMedrec.setOnClickListener {
+                    onBackPressed()
+                }
+            }
+            else{
+                binding.doneButtonMedrec.isClickable = false
+                binding.doneButtonMedrec.visibility = View.GONE
+                binding.attachMedicalRecordButton.visibility = View.GONE
+
+                binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
+                binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
+                binding.attachmentPreview.setText(MedRECInfo.fileName)
+                binding.attachmentview.visibility = View.VISIBLE
+                binding.backButtonMedrec.setOnClickListener {
+                    onBackPressed()
+                }
+            }
+
+
+        }else{
+            binding.doneButtonMedrec.setOnClickListener {
+                if (taskOngoing == 0){
+                    onBackPressed()
+                }else{
+                    Toast.makeText(this,"Please wait the task is being done",Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            binding.attachMedicalRecordButton.setOnClickListener {
+                showfile()
             }
 
         }
+
 
 
 
@@ -120,6 +171,15 @@ class add_edit_medrec : AppCompatActivity() {
                                     .addOnFailureListener { e ->
                                         Toast.makeText(this, "Error occurred, unable to upload: $e", Toast.LENGTH_SHORT).show()
                                     }
+
+                                MedrecHisCollref.document(binding.addmedrecTittleEdittext.text.toString())
+                                    .set(MedicalRecord)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this, "MEDICAL RECORD UPLOADED to history", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Error occurred, unable to upload in history: $e", Toast.LENGTH_SHORT).show()
+                                    }
                                 taskOngoing =0
 
                             }
@@ -131,18 +191,7 @@ class add_edit_medrec : AppCompatActivity() {
 
 
 
-        binding.doneButtonMedrec.setOnClickListener {
-            if (taskOngoing == 0){
-                onBackPressed()
-            }else{
-                Toast.makeText(this,"Please wait the task is being done",Toast.LENGTH_SHORT).show()
-            }
 
-        }
-
-        binding.attachMedicalRecordButton.setOnClickListener {
-            showfile()
-        }
         binding.backButtonMedrec.setOnClickListener {
             onBackPressed()
         }

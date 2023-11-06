@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,11 @@ class AppointmentFragment : Fragment() {
         RecyclerView.layoutManager = LinearLayoutManager(requireActivity())
          getdata()
 
+        view.findViewById<ImageView>(R.id.history).setOnClickListener {
+            val intent = Intent(requireActivity(),History::class.java)
+            intent.putExtra("HISTORY_TYPE","Appointment")
+            startActivity(intent)
+        }
 
         view.findViewById<ExtendedFloatingActionButton>(R.id.add_appointment_button).setOnClickListener {
             startActivity(Intent(requireActivity(),DoctorCategory::class.java))
@@ -63,7 +69,7 @@ class AppointmentFragment : Fragment() {
                    appointmentlist.add(appointment)
                }
             }
-            RecyclerView.adapter = AppointmentsAdapter(appointmentlist)
+            RecyclerView.adapter = AppointmentsAdapter(appointmentlist,true)
             Log.d("appointmentcrash","failed at line 67")
         }.addOnFailureListener { e->
             Toast.makeText(requireActivity(),"Failed to retrieve  $e ",Toast.LENGTH_LONG).show()

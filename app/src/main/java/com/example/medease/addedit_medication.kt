@@ -40,7 +40,7 @@ class addedit_medication : AppCompatActivity() {
         setContentView(binding.root)
 
         //scheduleNotification()
-        setAlarms()
+        //setAlarms()
 
 
         val selectedcurrentMEdJson = intent.getStringExtra("SELECTED_MED")
@@ -48,106 +48,198 @@ class addedit_medication : AppCompatActivity() {
             val gson = Gson()
             val CurrentMEd = gson.fromJson(selectedcurrentMEdJson, currentmed::class.java)
 
-            binding.MedicineName.setText(CurrentMEd.MedName)
-            binding.DosaGE.setText(CurrentMEd.Dose)
-            binding.numberodDays.setText(CurrentMEd.NoofDays)
-            Instructionflip(CurrentMEd.aftermeal)
-            binding.selectedtimes.visibility = View.VISIBLE
-            for (item in CurrentMEd.selectedtime) {
-                selectedtimes.add(item)
-            }
+            if (intent.getBooleanExtra("EDITABLE",true)){
 
-            Toast.makeText(this, "${CurrentMEd.selectedtime}", Toast.LENGTH_LONG).show()
-            val formattedString = selectedtimes.joinToString(separator = " , ") {
-                it.replace(
-                    "[\",\\[\\]]".toRegex(),
-                    ""
-                )
-            }
-            binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
-            binding.addtimeButton.setText("Change Time")
-            binding.selectedtimes.setText(formattedString)
-            binding.addtimeButton.setTextColor(Color.WHITE)
+                    Toast.makeText(
+                        this,
+                        "EDITABLE : ${intent.getBooleanExtra("EDITABLE", true)}",
+                        Toast.LENGTH_LONG
+                    ).show()
 
-
-        }
-
-
-
-
-
-        binding.backButtonMedication.setOnClickListener {
-            onBackPressed()
-        }
-        binding.DosaGE.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                // Enable the button if the EditText has text, or disable it if it's empty
-
-                if (!s.isNullOrBlank()) {
-                    binding.addtimeButton.isEnabled = true
-                    binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
-                    binding.addtimeButton.setTextColor(Color.WHITE)
-                } else {
-                    binding.addtimeButton.isEnabled = false
-                    binding.addtimeButton.setBackgroundColor(Color.parseColor("#F6F7F8"))
-                    binding.addtimeButton.setTextColor(Color.parseColor("#9B9B9B"))
+                binding.backButtonMedication.setOnClickListener {
+                    onBackPressed()
                 }
-            }
-        })
+                binding.DosaGE.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    }
 
-        binding.addtimeButton.setOnClickListener {
-            val intent = Intent(this, addmedicinetime::class.java)
-            intent.putExtra("Dosevalue", binding.DosaGE.text.toString().trim())
-            startActivityForResult(intent, Constants.REQUEST_CODE)
-        }
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
+                    override fun afterTextChanged(s: Editable?) {
+                        // Enable the button if the EditText has text, or disable it if it's empty
 
+                        if (!s.isNullOrBlank()) {
+                            binding.addtimeButton.isEnabled = true
+                            binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
+                            binding.addtimeButton.setTextColor(Color.WHITE)
+                        } else {
+                            binding.addtimeButton.isEnabled = false
+                            binding.addtimeButton.setBackgroundColor(Color.parseColor("#F6F7F8"))
+                            binding.addtimeButton.setTextColor(Color.parseColor("#9B9B9B"))
+                        }
+                    }
+                })
 
-        binding.addmedicationButton.setOnClickListener {
-
-
-            if (binding.MedicineName.text.isNullOrBlank() && binding.DosaGE.text.isNullOrBlank() && binding.numberodDays.text.isNullOrBlank()) {
-                Toast.makeText(this, "Please Fill the required", Toast.LENGTH_LONG).show()
-            }
-            val data = currentmed(
-                binding.MedicineName.text.toString().trim(),
-                binding.DosaGE.text.toString().trim(),
-                binding.numberodDays.text.toString().trim(),
-                selectedtimes, aftermeal
-            )
-            collRef.document(binding.MedicineName.text.toString().trim()).set(data)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Medication added succesfully", Toast.LENGTH_LONG).show()
-                    finish()
-                }.addOnFailureListener { e ->
-                    Toast.makeText(this, "task failed  $e", Toast.LENGTH_LONG).show()
+                binding.addtimeButton.setOnClickListener {
+                    val intent = Intent(this, addmedicinetime::class.java)
+                    intent.putExtra("Dosevalue", binding.DosaGE.text.toString().trim())
+                    startActivityForResult(intent, Constants.REQUEST_CODE)
                 }
 
-            historycollRef.document("${binding.MedicineName.text.toString().trim()}-${binding.numberodDays.text.toString().trim()} days").set(data)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Medication Hisstory added succesfully", Toast.LENGTH_LONG).show()
-                    finish()
-                }.addOnFailureListener { e ->
-                    Toast.makeText(this, "history addition failed  $e", Toast.LENGTH_LONG).show()
+
+
+                binding.addmedicationButton.setOnClickListener {
+
+
+                    if (binding.MedicineName.text.isNullOrBlank() && binding.DosaGE.text.isNullOrBlank() && binding.numberodDays.text.isNullOrBlank()) {
+                        Toast.makeText(this, "Please Fill the required", Toast.LENGTH_LONG).show()
+                    }
+                    val data = currentmed(
+                        binding.MedicineName.text.toString().trim(),
+                        binding.DosaGE.text.toString().trim(),
+                        binding.numberodDays.text.toString().trim(),
+                        selectedtimes, aftermeal
+                    )
+                    collRef.document(binding.MedicineName.text.toString().trim()).set(data)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Medication added succesfully", Toast.LENGTH_LONG).show()
+                            finish()
+                        }.addOnFailureListener { e ->
+                            Toast.makeText(this, "task failed  $e", Toast.LENGTH_LONG).show()
+                        }
+
+                    historycollRef.document("${binding.MedicineName.text.toString().trim()}-${binding.numberodDays.text.toString().trim()} days").set(data)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Medication Hisstory added succesfully", Toast.LENGTH_LONG).show()
+                            finish()
+                        }.addOnFailureListener { e ->
+                            Toast.makeText(this, "history addition failed  $e", Toast.LENGTH_LONG).show()
+                        }
+
                 }
 
-        }
+                binding.beforemeallayout.setOnClickListener {
+                    aftermeal = false
+                    Instructionflip(aftermeal)
 
-        binding.beforemeallayout.setOnClickListener {
-            aftermeal = false
-            Instructionflip(aftermeal)
+                }
 
-        }
+                binding.aftermeal.setOnClickListener {
+                    aftermeal = true
+                    Instructionflip(aftermeal)
 
-        binding.aftermeal.setOnClickListener {
-            aftermeal = true
-            Instructionflip(aftermeal)
+                }
+            }
+            else{
 
+                binding.MedicineName.setText(CurrentMEd.MedName)
+                binding.DosaGE.setText(CurrentMEd.Dose)
+                binding.numberodDays.setText(CurrentMEd.NoofDays)
+                Instructionflip(CurrentMEd.aftermeal)
+                binding.selectedtimes.visibility = View.VISIBLE
+                for (item in CurrentMEd.selectedtime) {
+                    selectedtimes.add(item)
+                }
+
+                Toast.makeText(this, "${CurrentMEd.selectedtime}", Toast.LENGTH_LONG).show()
+                val formattedString = selectedtimes.joinToString(separator = " , ") {
+                    it.replace(
+                        "[\",\\[\\]]".toRegex(),
+                        ""
+                    )
+                }
+                binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
+                binding.addtimeButton.setText("Change Time")
+                binding.selectedtimes.setText(formattedString)
+                binding.addtimeButton.setTextColor(Color.WHITE)
+
+                binding.addmedicationButton.isClickable = false
+                binding.addmedicationButton.visibility = View.GONE
+
+                binding.backButtonMedication.setOnClickListener {
+                    onBackPressed()
+                }
+            }
+
+
+
+
+        }else{
+            binding.backButtonMedication.setOnClickListener {
+                onBackPressed()
+            }
+            binding.DosaGE.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    // Enable the button if the EditText has text, or disable it if it's empty
+
+                    if (!s.isNullOrBlank()) {
+                        binding.addtimeButton.isEnabled = true
+                        binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
+                        binding.addtimeButton.setTextColor(Color.WHITE)
+                    } else {
+                        binding.addtimeButton.isEnabled = false
+                        binding.addtimeButton.setBackgroundColor(Color.parseColor("#F6F7F8"))
+                        binding.addtimeButton.setTextColor(Color.parseColor("#9B9B9B"))
+                    }
+                }
+            })
+
+            binding.addtimeButton.setOnClickListener {
+                val intent = Intent(this, addmedicinetime::class.java)
+                intent.putExtra("Dosevalue", binding.DosaGE.text.toString().trim())
+                startActivityForResult(intent, Constants.REQUEST_CODE)
+            }
+
+
+
+            binding.addmedicationButton.setOnClickListener {
+
+
+                if (binding.MedicineName.text.isNullOrBlank() && binding.DosaGE.text.isNullOrBlank() && binding.numberodDays.text.isNullOrBlank()) {
+                    Toast.makeText(this, "Please Fill the required", Toast.LENGTH_LONG).show()
+                }else{
+                    val data = currentmed(
+                        binding.MedicineName.text.toString().trim(),
+                        binding.DosaGE.text.toString().trim(),
+                        binding.numberodDays.text.toString().trim(),
+                        selectedtimes, aftermeal
+                    )
+                    collRef.document(binding.MedicineName.text.toString().trim()).set(data)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Medication added succesfully", Toast.LENGTH_LONG).show()
+                            finish()
+                        }.addOnFailureListener { e ->
+                            Toast.makeText(this, "task failed  $e", Toast.LENGTH_LONG).show()
+                        }
+
+                    historycollRef.document("${binding.MedicineName.text.toString().trim()}-${binding.numberodDays.text.toString().trim()} days").set(data)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Medication Hisstory added succesfully", Toast.LENGTH_LONG).show()
+                            finish()
+                        }.addOnFailureListener { e ->
+                            Toast.makeText(this, "history addition failed  $e", Toast.LENGTH_LONG).show()
+                        }
+                }
+
+
+            }
+
+            binding.beforemeallayout.setOnClickListener {
+                aftermeal = false
+                Instructionflip(aftermeal)
+
+            }
+
+            binding.aftermeal.setOnClickListener {
+                aftermeal = true
+                Instructionflip(aftermeal)
+
+            }
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.medease
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
@@ -78,7 +79,11 @@ class BookingActivity : AppCompatActivity() {
         binding.BookAppointment.setOnClickListener {
             val selectedDate = selectedTextViewdate!!.text.toString()
             val selectedTime = selectedTextViewtime!!.text.toString()
-            if (selectedDate.isNotEmpty() && selectedTime.isNotEmpty()) {
+            val Email = binding.Email.text.toString()
+            val Phoneno = binding.PhoneNo.text.toString()
+            val Name = binding.Username.text.toString()
+
+            if (selectedDate.isNotEmpty() && selectedTime.isNotEmpty() && Email.isNotEmpty() && Name.isNotEmpty() && Phoneno.isNotEmpty()) {
                 if (selectedDate == dateFormat.format(Date()) && timeFormat.parse(selectedTime)<=timeFormat.parse(timeFormat.format(Date()))){
                     Toast.makeText(this,"Time has already passed cant book right now",Toast.LENGTH_LONG).show()
                 }else{
@@ -86,8 +91,10 @@ class BookingActivity : AppCompatActivity() {
                 }
 
             } else {
-                Toast.makeText(this, "Please select a date and time.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please Fill all the entries", Toast.LENGTH_LONG).show()
             }
+
+            startActivity(Intent(this,Home::class.java))
         }
     }
 

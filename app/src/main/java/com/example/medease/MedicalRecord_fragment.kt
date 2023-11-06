@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +47,11 @@ class MedicalRecord_fragment : Fragment() {
         recyclerveiw.layoutManager = LinearLayoutManager(requireActivity())
 
 
+        view.findViewById<ImageView>(R.id.history).setOnClickListener {
+            val intent = Intent(requireActivity(),History::class.java)
+            intent.putExtra("HISTORY_TYPE","MedRec")
+            startActivity(intent)
+        }
         getmedrec()
 
         addbutton.setOnClickListener {
@@ -74,7 +80,7 @@ class MedicalRecord_fragment : Fragment() {
 
                 }
                 Log.d("medrecfailure", "Working till line 74")
-                recyclerveiw.adapter = medrecAdapter(documentList)
+                recyclerveiw.adapter = medrecAdapter(documentList,true)
 
             }
 
