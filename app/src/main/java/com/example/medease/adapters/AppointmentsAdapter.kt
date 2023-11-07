@@ -67,6 +67,14 @@ class AppointmentsAdapter(
 
     override fun onBindViewHolder(holder: AppointmentsViewHolder, position: Int) {
 
+        if (AppointmentsAdapter.scheduledappointmentlist.isNotEmpty()) {
+            val appointment = AppointmentsAdapter.scheduledappointmentlist[position]
+            // Now you can safely access the item
+            // ...
+        } else {
+            // Handle the case where the list is empty
+            // For example, show a message or handle it as needed
+        }
         val appointment = scheduledappointmentlist[position]
         val doctorId = appointment.liscenseID
 
@@ -178,10 +186,6 @@ class AppointmentsAdapter(
 
     }
 
-    fun Updatelist(list : MutableList<Appointment>){
-        scheduledappointmentlist.clear()
-        scheduledappointmentlist.addAll(list)
-    }
     private fun getDoctorData(docId: String, callback: (DoctorDetail?) -> Unit) {
         CollRef.document(docId).get().addOnSuccessListener { document ->
             if (document != null) {
@@ -195,4 +199,9 @@ class AppointmentsAdapter(
         }
     }
 
+
+    fun Updatelist(list : MutableList<Appointment>){
+        scheduledappointmentlist.clear()
+        scheduledappointmentlist.addAll(list)
+    }
 }

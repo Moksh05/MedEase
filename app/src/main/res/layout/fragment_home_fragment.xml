@@ -3,10 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:background="#4DCEE8FB"
     android:orientation="vertical"
     tools:context=".Home_fragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming APpointments"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+        android:textSize="23dp"></TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
+        android:padding="8dp"
+        android:id="@+id/join_appointment_recyclerview"
+        tools:listitem="@layout/scheduled_appointment_item">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <TextView
         android:id="@+id/testtext"
@@ -20,5 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Signout"></Button>
+
+    <Button
+        android:id="@+id/join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="join"></Button>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

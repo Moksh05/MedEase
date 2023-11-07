@@ -25,21 +25,21 @@ class NotificationReceiver : BroadcastReceiver() {
 
         Log.d("NotificationReceived", "Received notification")
 
-//        val i = Intent(context, addedit_medication::class.java)
-//        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        val pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
-//
-//        val builder = NotificationCompat.Builder(context!!, "MedEase")
-//            .setSmallIcon(R.drawable.ic_launcher_background)
-//            .setContentTitle(tittle)
-//            .setContentText(message)
-//            .setAutoCancel(true)
-//            .setDefaults(NotificationCompat.DEFAULT_ALL)
-//            .setPriority(NotificationCompat.PRIORITY_HIGH)
-//            .setContentIntent(pendingIntent)
-//
-//        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//        manager.notify(Notificationid, builder.build())
+        val i = Intent(context, addedit_medication::class.java)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_IMMUTABLE)
+
+        val builder = NotificationCompat.Builder(context!!, "MedEase")
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle(tittle)
+            .setContentText(message)
+            .setAutoCancel(true)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(Notificationid, builder.build())
 
 
     }
