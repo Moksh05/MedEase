@@ -88,13 +88,14 @@ class BookingActivity : AppCompatActivity() {
                     Toast.makeText(this,"Time has already passed cant book right now",Toast.LENGTH_LONG).show()
                 }else{
                     scheduleAppointment(docId!!, typeOfAppointment!!)
+                    startActivity(Intent(this,Home::class.java))
                 }
 
             } else {
                 Toast.makeText(this, "Please Fill all the entries", Toast.LENGTH_LONG).show()
             }
 
-            startActivity(Intent(this,Home::class.java))
+
         }
     }
 

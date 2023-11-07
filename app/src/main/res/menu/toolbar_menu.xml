@@ -5,6 +5,7 @@
     <item android:visible="true"
         android:id="@+id/toolbar_profile"
         android:title="Profile"
+        android:iconTint="@color/black"
         android:icon="@drawable/profile"
         app:showAsAction="always">
     </item>

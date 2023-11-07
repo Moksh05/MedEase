@@ -32,6 +32,9 @@
         android:theme="@style/Theme.MedEase"
         tools:targetApi="31">
         <activity
+            android:name=".VideoChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".History"
             android:exported="false" />
         <activity
@@ -93,7 +96,7 @@
         <activity
             android:name=".SignInActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

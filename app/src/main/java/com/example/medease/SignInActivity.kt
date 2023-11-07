@@ -42,11 +42,15 @@ class SignInActivity : AppCompatActivity() {
 
 
         binding.signupText.setOnClickListener {
+            binding.LoginText.setText("Sign Up")
+            binding.welcomeRegister.setText("Register Yourself")
             binding.viewflipper.setOutAnimation(this, R.anim.slide_left)
             binding.viewflipper.setInAnimation(this, R.anim.slide_right)
             binding.viewflipper.showNext()
         }
         binding.signinText.setOnClickListener {
+            binding.LoginText.setText("Login")
+            binding.welcomeRegister.setText("Welcome User")
             binding.viewflipper.setInAnimation(this, R.anim.slide_left)
             binding.viewflipper.setOutAnimation(this, R.anim.slide_right)
             binding.viewflipper.showPrevious()

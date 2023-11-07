@@ -50,6 +50,27 @@ class addedit_medication : AppCompatActivity() {
 
             if (intent.getBooleanExtra("EDITABLE",true)){
 
+                binding.MedicineName.setText(CurrentMEd.MedName)
+                binding.DosaGE.setText(CurrentMEd.Dose)
+                binding.numberodDays.setText(CurrentMEd.NoofDays)
+                Instructionflip(CurrentMEd.aftermeal)
+                binding.selectedtimes.visibility = View.VISIBLE
+                for (item in CurrentMEd.selectedtime) {
+                    selectedtimes.add(item)
+                }
+
+                Toast.makeText(this, "${CurrentMEd.selectedtime}", Toast.LENGTH_LONG).show()
+                val formattedString = selectedtimes.joinToString(separator = " , ") {
+                    it.replace(
+                        "[\",\\[\\]]".toRegex(),
+                        ""
+                    )
+                }
+                binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
+                binding.addtimeButton.setText("Change Time")
+                binding.selectedtimes.setText(formattedString)
+                binding.addtimeButton.setTextColor(Color.WHITE)
+
                     Toast.makeText(
                         this,
                         "EDITABLE : ${intent.getBooleanExtra("EDITABLE", true)}",
@@ -133,8 +154,20 @@ class addedit_medication : AppCompatActivity() {
             else{
 
                 binding.MedicineName.setText(CurrentMEd.MedName)
+                binding.MedicineName.isFocusable = false;
+                binding.MedicineName.isFocusableInTouchMode = false;
+                binding.MedicineName.isClickable = false;
+
                 binding.DosaGE.setText(CurrentMEd.Dose)
+                binding.DosaGE.isFocusable = false;
+                binding.DosaGE.isFocusableInTouchMode = false;
+                binding.DosaGE.isClickable = false;
+
                 binding.numberodDays.setText(CurrentMEd.NoofDays)
+                binding.numberodDays.isFocusable = false;
+                binding.numberodDays.isFocusableInTouchMode = false;
+                binding.numberodDays.isClickable = false;
+
                 Instructionflip(CurrentMEd.aftermeal)
                 binding.selectedtimes.visibility = View.VISIBLE
                 for (item in CurrentMEd.selectedtime) {
@@ -148,10 +181,11 @@ class addedit_medication : AppCompatActivity() {
                         ""
                     )
                 }
-                binding.addtimeButton.setBackgroundColor(Color.parseColor("#098EF8"))
-                binding.addtimeButton.setText("Change Time")
+
+                binding.addtimeButton.setText("Time")
                 binding.selectedtimes.setText(formattedString)
-                binding.addtimeButton.setTextColor(Color.WHITE)
+                binding.addtimeButton.setBackgroundColor(Color.parseColor("#F6F7F8"))
+                binding.addtimeButton.setTextColor(Color.parseColor("#9B9B9B"))
 
                 binding.addmedicationButton.isClickable = false
                 binding.addmedicationButton.visibility = View.GONE

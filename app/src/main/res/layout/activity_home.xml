@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start"
+
     android:id="@+id/drawerlayout"
 
     tools:context=".Home">
@@ -16,7 +16,7 @@
             android:id="@+id/support_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/button_back">
+            android:background="#4DCEE8FB">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
