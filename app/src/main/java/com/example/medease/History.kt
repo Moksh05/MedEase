@@ -136,7 +136,9 @@ class History : AppCompatActivity() {
                     appointmentlist.add(appointment)
                 }
             }
-            recyclerview.adapter = AppointmentsAdapter(appointmentlist, false)
+            var adapter = AppointmentsAdapter(false)
+            adapter.Updatelist(appointmentlist)
+            recyclerview.adapter = adapter
             Log.d("appointmentcrash", "failed at line 67")
         }.addOnFailureListener { e ->
             Toast.makeText(this, "Failed to retrieve  $e ", Toast.LENGTH_LONG).show()

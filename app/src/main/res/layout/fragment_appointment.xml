@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="#4DCEE8FB"
     android:layout_marginTop="?attr/actionBarSize"
+    android:background="#4DCEE8FB"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".AppointmentFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/medication_searchbar_layout"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:weightSum="10">
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintBottom_toTopOf="@id/appointment_recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/medication_searchbar"
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:layout_weight="8.3"
             android:layout_alignParentTop="true"
-
             android:layout_marginTop="5dp"
+
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
+            android:layout_weight="8.3"
             android:background="@drawable/searchbar"
             android:backgroundTint="@color/white"
             android:elevation="3dp"
             android:padding="10dp"
             app:iconifiedByDefault="true"
-            app:queryHint="Search Medicine">
-        </androidx.appcompat.widget.SearchView>
+            app:queryHint="Search Medicine"></androidx.appcompat.widget.SearchView>
 
         <ImageView
             android:id="@+id/history"
             android:layout_width="0dp"
-            android:layout_weight="1.2"
             android:layout_height="40dp"
-            android:src="@drawable/history_icon"
             android:layout_toEndOf="@id/medication_searchbar"
+            android:layout_weight="1.2"
+            android:src="@drawable/history_icon"
             app:tint="@color/colorPrimary_blue"></ImageView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
@@ -64,9 +67,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/appointment_recyclerview"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/medication_searchbar_layout"
         tools:listitem="@layout/scheduled_appointment_item"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/medication_searchbar_layout"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintBottom_toTopOf="@id/add_appointment_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medication_searchbar_layout"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_appointment_button"
@@ -74,14 +81,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+
         android:text="Schedule Appointment"
         android:textColor="@color/white"
         android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appointment_recyclerview"
         app:backgroundTint="@color/colorPrimary_blue"></com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

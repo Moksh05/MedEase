@@ -105,6 +105,18 @@ var editable= true
                 binding.doneButtonMedrec.visibility = View.GONE
                 binding.attachMedicalRecordButton.visibility = View.GONE
 
+                binding.addmedrecDescEdittext.isFocusable = false;
+                binding.addmedrecDescEdittext.isFocusableInTouchMode = false;
+                binding.addmedrecDescEdittext.isClickable = false;
+
+                binding.attachmentPreview.isFocusable = false;
+                binding.attachmentPreview.isFocusableInTouchMode = false;
+                binding.attachmentPreview.isClickable = false;
+
+                binding.addmedrecTittleEdittext.isFocusable = false;
+                binding.addmedrecTittleEdittext.isFocusableInTouchMode = false;
+                binding.addmedrecTittleEdittext.isClickable = false;
+
                 binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
                 binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
                 binding.attachmentPreview.setText(MedRECInfo.fileName)

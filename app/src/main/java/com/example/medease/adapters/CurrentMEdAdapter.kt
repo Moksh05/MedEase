@@ -82,15 +82,20 @@ class CurrentMEdAdapter(val CurrentMedList: MutableList<currentmed>,val deleteab
               builder.setMessage("Are you sure you want to delete this medication?")
               builder.setPositiveButton("Yes") { _, _ ->
                   // Handle the delete confirmation
+
+                  CurrentMedList.removeAt(position)
+                  notifyItemRemoved(position)
+                  notifyItemRangeChanged(position, CurrentMedList.size)
                   // Perform the actual delete operation (e.g., from Firebase Firestore)
+
+
                   collRef.document(medData.MedName).delete().addOnSuccessListener {
                       Toast.makeText(holder.selectedMed.context, "Record Deleted", Toast.LENGTH_SHORT).show()
                   }.addOnFailureListener {
                       Toast.makeText(holder.selectedMed.context, "Failed to delete record", Toast.LENGTH_SHORT).show()
                   }
 
-                  CurrentMedList.removeAt(position)
-                  notifyItemRemoved(position)
+
               }
               builder.setNegativeButton("No") { _, _ ->
                   // Do nothing or dismiss the dialog

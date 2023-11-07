@@ -69,7 +69,9 @@ class AppointmentFragment : Fragment() {
                    appointmentlist.add(appointment)
                }
             }
-            RecyclerView.adapter = AppointmentsAdapter(appointmentlist,true)
+            val adapter = AppointmentsAdapter(true)
+            adapter.Updatelist(appointmentlist)
+            RecyclerView.adapter = adapter
             Log.d("appointmentcrash","failed at line 67")
         }.addOnFailureListener { e->
             Toast.makeText(requireActivity(),"Failed to retrieve  $e ",Toast.LENGTH_LONG).show()

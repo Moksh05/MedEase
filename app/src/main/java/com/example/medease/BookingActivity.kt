@@ -77,23 +77,29 @@ class BookingActivity : AppCompatActivity() {
         binding.Email.setText(auth.currentUser?.email)
 
         binding.BookAppointment.setOnClickListener {
-            val selectedDate = selectedTextViewdate!!.text.toString()
-            val selectedTime = selectedTextViewtime!!.text.toString()
-            val Email = binding.Email.text.toString()
-            val Phoneno = binding.PhoneNo.text.toString()
-            val Name = binding.Username.text.toString()
+            if(selectedTextViewdate !=null && selectedTextViewtime != null){
+                val selectedDate = selectedTextViewdate!!.text.toString()
+                val selectedTime = selectedTextViewtime!!.text.toString()
 
-            if (selectedDate.isNotEmpty() && selectedTime.isNotEmpty() && Email.isNotEmpty() && Name.isNotEmpty() && Phoneno.isNotEmpty()) {
-                if (selectedDate == dateFormat.format(Date()) && timeFormat.parse(selectedTime)<=timeFormat.parse(timeFormat.format(Date()))){
-                    Toast.makeText(this,"Time has already passed cant book right now",Toast.LENGTH_LONG).show()
-                }else{
-                    scheduleAppointment(docId!!, typeOfAppointment!!)
-                    startActivity(Intent(this,Home::class.java))
+                val Email = binding.Email.text.toString()
+                val Phoneno = binding.PhoneNo.text.toString()
+                val Name = binding.Username.text.toString()
+
+                if (selectedDate.isNotEmpty() && selectedTime.isNotEmpty() && Email.isNotEmpty() && Name.isNotEmpty() && Phoneno.isNotEmpty()) {
+                    if (selectedDate == dateFormat.format(Date()) && timeFormat.parse(selectedTime)<=timeFormat.parse(timeFormat.format(Date()))){
+                        Toast.makeText(this,"Time has already passed cant book right now",Toast.LENGTH_LONG).show()
+                    }else{
+                        scheduleAppointment(docId!!, typeOfAppointment!!)
+                        startActivity(Intent(this,Home::class.java))
+                    }
+
+                } else {
+                    Toast.makeText(this, "Please Fill all the entries", Toast.LENGTH_LONG).show()
                 }
-
-            } else {
-                Toast.makeText(this, "Please Fill all the entries", Toast.LENGTH_LONG).show()
+            }else {
+                Toast.makeText(this, "Please Select time and date", Toast.LENGTH_LONG).show()
             }
+
 
 
         }

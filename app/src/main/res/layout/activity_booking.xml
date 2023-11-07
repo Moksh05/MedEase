@@ -52,6 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Full Name"
+                    android:maxLines="1"
+                    android:inputType="text"
                     android:imeOptions="actionNext"
                     android:nextFocusForward="@id/Email"
                     android:textSize="16dp" />
@@ -68,6 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Email"
+                    android:maxLines="1"
+                    android:inputType="textEmailAddress"
                     android:imeOptions="actionNext"
                     android:nextFocusForward="@id/Phone_no"
                     android:textSize="16dp" />
@@ -83,7 +87,8 @@
                     android:layout_height="match_parent"
                     android:hint="Phone No"
                     android:imeOptions="actionDone"
-
+                    android:maxLines="1"
+android:inputType="phone"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 

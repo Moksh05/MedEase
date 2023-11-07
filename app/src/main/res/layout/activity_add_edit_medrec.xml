@@ -68,6 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Tittle"
+            android:imeOptions="actionNext"
+            android:nextFocusForward="@id/addmedrec_desc_edittext"
             android:textSize="20dp"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +78,7 @@
         android:layout_below="@+id/add_medrec_tittle_editview"
         android:id="@+id/add_medrec_desc_editview"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText

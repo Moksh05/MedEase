@@ -69,6 +69,10 @@ class medrecAdapter(val medreclist: MutableList<MedRec>,val deletable : Boolean)
                 builder.setMessage("Are you sure you want to delete this medication?")
                 builder.setPositiveButton("Yes") { _, _ ->
                     // Handle the delete confirmation
+                    medreclist.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, medreclist.size)
+
                     // Perform the actual delete operation (e.g., from Firebase Firestore)
                     collRef.document(medData.Tittle).delete().addOnSuccessListener {
                         Toast.makeText(holder.selectedmedrec.context, "Record Deleted", Toast.LENGTH_SHORT).show()
@@ -86,8 +90,7 @@ class medrecAdapter(val medreclist: MutableList<MedRec>,val deletable : Boolean)
 
 
 
-                    medreclist.removeAt(position)
-                    notifyItemRemoved(position)
+
                 }
                 builder.setNegativeButton("No") { _, _ ->
                     // Do nothing or dismiss the dialog
