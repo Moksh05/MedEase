@@ -83,11 +83,22 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
             var currentdate = dateFormat.format(Date())
             var currenttime = timeFormat.format(Date())
 
-            if (currentdate == list[position].date && currenttime == list[position].time){
-                holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
-            }else{
-                Toast.makeText(holder.selectedappointment.context,"Cant Join Now Not the time reached",Toast.LENGTH_LONG).show()
+            var meetingstart = timeFormat.parse(list[position].time)
+            if (meetingstart!= null ){
+                var calendar = Calendar.getInstance()
+                calendar.time = meetingstart
+                calendar.add(Calendar.HOUR_OF_DAY,1)
+                val endtime = timeFormat.format(calendar.time)
+
+                if (currentdate == list[position].date && (timeFormat.parse(currenttime) >= meetingstart  || timeFormat.parse(currenttime) < timeFormat.parse(endtime) )){
+                    holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
+                }else{
+                    Toast.makeText(holder.selectedappointment.context,"Cant Join Now Not the time reached",Toast.LENGTH_LONG).show()
+                    holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
+                }
             }
+
+
 
         }
 

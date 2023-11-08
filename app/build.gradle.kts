@@ -63,7 +63,7 @@ dependencies {
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("com.google.android.gms:play-services-maps:18.0.0")
-    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
 //used piccasso to add image from a url
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

@@ -3,6 +3,7 @@ package com.example.medease.adapters
 import Article
 import NewsItem
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,11 +38,13 @@ class NewsAdapter(val NewsList:List<Article>) : RecyclerView.Adapter<NewsAdapter
     override fun onBindViewHolder(holder: NewsAdapter.NewsViewHolder, position: Int) {
         holder.newsTitle.text = NewsList[position].title
 
-        if(NewsList[position].urlToImage!=null){
+        if(NewsList[position].urlToImage!= null && !(NewsList[position].urlToImage.isNullOrEmpty())){
             Picasso.get().load(NewsList[position].urlToImage).into(holder.newsImage)
+            Log.d("IMAGETAG","${NewsList[position].urlToImage}")
         }else{
             holder.newsImage.setImageResource(R.drawable.imgnotfound)
         }
+//        holder.newsImage.setImageResource(R.drawable.imgnotfound)
 
         holder.news_item.setOnClickListener {
             val selecteddNews = Gson().toJson(NewsList[position])

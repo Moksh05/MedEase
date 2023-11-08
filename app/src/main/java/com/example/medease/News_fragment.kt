@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +31,8 @@ class News_fragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //view.findViewById<ProgressBar>(R.id.loadingProgressBar_news).visibility = View.VISIBLE
+        view.findViewById<LinearLayoutCompat>(R.id.news_layout).visibility = View.VISIBLE
         getNews()
 
     }
@@ -64,6 +68,9 @@ class News_fragment : Fragment() {
                         NewsRecyclerView?.layoutManager = LinearLayoutManager(requireActivity())
                         NewsRecyclerView?.adapter = NewsAdapter(newsResponse.articles!!)
 
+
+                        //view?.findViewById<ProgressBar>(R.id.loadingProgressBar_news)?.visibility = View.GONE
+                        view?.findViewById<LinearLayoutCompat>(R.id.news_layout)?.visibility = View.VISIBLE
                         Toast.makeText(requireActivity(),"Callback received",Toast.LENGTH_LONG).show()
 
                     }
