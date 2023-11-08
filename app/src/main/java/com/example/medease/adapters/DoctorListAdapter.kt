@@ -63,12 +63,14 @@ class DoctorListAdapter(var DoctorList: MutableList<DoctorDetail>) :
             val intent = Intent(holder.selecteddoc.context, BookingActivity::class.java)
             intent.putExtra("SELECTED_DOC", DoctorList[position].licenseNumber)
             intent.putExtra("BOOKING_TYPE","offline")
+            intent.putExtra("FEE", DoctorList[position].fee)
             holder.selecteddoc.context.startActivity(intent)
         }
         holder.offline.setOnClickListener {
             val intent = Intent(holder.selecteddoc.context, BookingActivity::class.java)
             intent.putExtra("SELECTED_DOC", DoctorList[position].licenseNumber)
             intent.putExtra("BOOKING_TYPE","offline")
+            intent.putExtra("FEE",DoctorList[position].fee)
             holder.selecteddoc.context.startActivity(intent)
         }
         //has to change the activity it is going to

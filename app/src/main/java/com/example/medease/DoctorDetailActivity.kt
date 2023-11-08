@@ -60,6 +60,7 @@ class DoctorDetailActivity : AppCompatActivity() {
                     binding.BookClinicButton.setOnClickListener {
                         var intent = Intent(this,BookingActivity::class.java)
                         intent.putExtra("BOOKING_TYPE","offline")
+                        intent.putExtra("FEE",doctor.fee)
                         intent.putExtra("SELECTED_DOC",doctor.licenseNumber)
                         startActivity(intent)
                     }

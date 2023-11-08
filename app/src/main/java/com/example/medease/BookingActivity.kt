@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.medease.databinding.ActivityBookingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class BookingActivity : AppCompatActivity() {
+class BookingActivity : AppCompatActivity() , PaymentResultListener {
     private val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
     private val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
 
@@ -29,6 +32,8 @@ class BookingActivity : AppCompatActivity() {
     var selectedTextViewtime: TextView? = null
     private lateinit var binding: ActivityBookingBinding
 
+    var docId:String? = ""
+    var typeOfAppointment:String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookingBinding.inflate(layoutInflater)
@@ -66,8 +71,9 @@ class BookingActivity : AppCompatActivity() {
         }
 
         // Perform the remaining tasks here
-        val docId = intent.getStringExtra("SELECTED_DOC")
-        val typeOfAppointment = intent.getStringExtra("BOOKING_TYPE")
+         docId = intent.getStringExtra("SELECTED_DOC")
+         typeOfAppointment = intent.getStringExtra("BOOKING_TYPE")
+        val fee = intent.getStringExtra("FEE")
 
 
         // Get the current date
@@ -76,6 +82,7 @@ class BookingActivity : AppCompatActivity() {
         binding.Username.setText(auth.currentUser?.displayName)
         binding.Email.setText(auth.currentUser?.email)
 
+        binding.BookAppointment.setText("Pay $fee /-")
         binding.BookAppointment.setOnClickListener {
             if(selectedTextViewdate !=null && selectedTextViewtime != null){
                 val selectedDate = selectedTextViewdate!!.text.toString()
@@ -89,8 +96,10 @@ class BookingActivity : AppCompatActivity() {
                     if (selectedDate == dateFormat.format(Date()) && timeFormat.parse(selectedTime)<=timeFormat.parse(timeFormat.format(Date()))){
                         Toast.makeText(this,"Time has already passed cant book right now",Toast.LENGTH_LONG).show()
                     }else{
-                        scheduleAppointment(docId!!, typeOfAppointment!!)
-                        startActivity(Intent(this,Home::class.java))
+                        if (fee != null) {
+                            makepayment(fee.toInt())
+                        }
+
                     }
 
                 } else {
@@ -100,10 +109,41 @@ class BookingActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please Select time and date", Toast.LENGTH_LONG).show()
             }
 
+        }
+        Checkout.preload(this@BookingActivity)
+    }
 
+    private fun makepayment(amount:Int){
+        val checkout = Checkout()
+        checkout.setKeyID("rzp_test_7qJAr39tOH9ZBe")
+
+        try{
+            val options = JSONObject()
+            options.put("name","Dummy Payment")
+            options.put("description","Complete the payment to schedule the appointment")
+            options.put("theme.color","#098EF8")
+            options.put("amount",amount*100)
+            options.put("currency","INR")
+
+            val retryObj = JSONObject()
+            retryObj.put("enabled",true)
+            retryObj.put("max_count",4)
+            retryObj.put("retry",retryObj)
+
+            checkout.open(this@BookingActivity,options)
+
+        }catch (e:Exception){
+
+            Toast.makeText(this,"Error $e",Toast.LENGTH_LONG).show()
+            e.printStackTrace()
 
         }
+
+
+
+
     }
+
 
     private fun setupTextViewClickListener(textView: TextView, type: String) {
         textView.setOnClickListener {
@@ -212,5 +252,16 @@ class BookingActivity : AppCompatActivity() {
                     Toast.makeText(this, "Failed to add time slot", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    override fun onPaymentSuccess(p0: String?) {
+
+        Toast.makeText(this, "Payment Succeded", Toast.LENGTH_LONG).show()
+        scheduleAppointment(docId!!, typeOfAppointment!!)
+        startActivity(Intent(this,Home::class.java))
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?) {
+        Toast.makeText(this, "Payment Failed", Toast.LENGTH_LONG).show()
     }
 }
