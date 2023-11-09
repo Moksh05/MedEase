@@ -60,16 +60,32 @@
 <!--        android:layout_height="match_parent"-->
 <!--        android:layout_below="@+id/medication_searchbar">-->
 <!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medication_searchbar_layout"
+        android:visibility="gone"></ProgressBar>
 
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/medication_searchbar_layout">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/currentmed_recyclerview"
         android:layout_width="match_parent"
 
 
-tools:listitem="@layout/currentmedicine_item"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/medication_searchbar_layout"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/currentmedicine_item"
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_medication_button"

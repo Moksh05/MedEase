@@ -1,13 +1,11 @@
 package com.example.medease
 
-import android.Manifest
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -16,8 +14,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.example.medease.Constants.Constants
 import com.example.medease.Modal.currentmed
 import com.example.medease.adapters.NotificationReceiver
@@ -25,6 +21,7 @@ import com.example.medease.databinding.ActivityAddeditMedicationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class addedit_medication : AppCompatActivity() {
@@ -38,15 +35,14 @@ class addedit_medication : AppCompatActivity() {
     private lateinit var binding: ActivityAddeditMedicationBinding
     var selectedtimes = mutableListOf<String>()
     var aftermeal = false
-
+    var myHours : Int = 0
+    var myMinutes : Int= 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddeditMedicationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        scheduleNotification()
-        setAlarms()
 
 
         val selectedcurrentMEdJson = intent.getStringExtra("SELECTED_MED")
@@ -143,6 +139,21 @@ class addedit_medication : AppCompatActivity() {
                             Toast.makeText(this, "history addition failed  $e", Toast.LENGTH_LONG).show()
                         }
 
+                    val inputFormat = SimpleDateFormat("hh:mm a")
+                    val outputFormat = SimpleDateFormat("HH:mm")
+
+                    // Parse the input time string
+                    val date = inputFormat.parse(selectedtimes.get(0))
+
+                    // Convert to the 24-hour format
+                    val formattedTime = outputFormat.format(date)
+
+                    // Extract hours and minutes
+                    val parts = formattedTime.split(":")
+                    myHours = parts[0].toInt()
+                    myMinutes = parts[1].toInt()
+
+                    setAlarms()
                 }
 
                 binding.beforemeallayout.setOnClickListener {
@@ -345,48 +356,28 @@ class addedit_medication : AppCompatActivity() {
 
         val intent = Intent(this, NotificationReceiver::class.java)
 
-        var pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
-        val calendar: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            add(Calendar.MINUTE, 1) // Set alarm 1 minute from now
-        }
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, myHours)
+        calendar.set(Calendar.MINUTE, myMinutes)
 
 // setRepeating() lets you specify a precise custom interval--in this case,
 // 20 minutes.
 
 
-        alarmManager.setInexactRepeating(
+        alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+            AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
 
         Toast.makeText(this, "Alarm Set Successful", Toast.LENGTH_SHORT).show()
     }
 
-    private fun scheduleNotification() {
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "MedicareproChannel"
-            val description = "Channel for Alarm Manager"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel("MedEase", name, importance)
-
-            // Set the channel description
-            channel.description = description
-
-            val notificationManager = getSystemService(NotificationManager::class.java)
-
-            // Create the notification channel
-            notificationManager.createNotificationChannel(channel)
-
-        }
-
-
-    }
 
 
 }

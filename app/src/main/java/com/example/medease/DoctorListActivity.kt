@@ -2,6 +2,7 @@ package com.example.medease
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +44,8 @@ private lateinit var recyclerview:RecyclerView
 
 
     private fun getdoclist() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.doctorlistRecyclerview.visibility = View.GONE
         Log.d("DocCatCrash","Error at 110")
         CollRef.get().addOnSuccessListener { querySnapshot ->
             Log.d("DocCatCrash","Error at 112")
@@ -56,7 +59,8 @@ private lateinit var recyclerview:RecyclerView
                 }
             }
             recyclerview.adapter = DoctorListAdapter(doctorList)
-
+            binding.loadingBar.visibility = View.GONE
+            binding.doctorlistRecyclerview.visibility = View.VISIBLE
         }
             .addOnFailureListener { exception ->
                 Toast.makeText(this,"Failed $exception to retrieve data", Toast.LENGTH_LONG).show()

@@ -49,6 +49,11 @@
     <!--        android:layout_below="@+id/medication_searchbar">-->
     <!--    </androidx.recyclerview.widget.RecyclerView>-->
 
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"></ProgressBar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doctorlist_recyclerview"

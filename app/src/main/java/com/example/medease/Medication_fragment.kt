@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.medease.Modal.currentmed
 import com.example.medease.adapters.CurrentMEdAdapter
 import com.example.medease.adapters.SuggestionAdapter
@@ -51,7 +53,14 @@ class Medication_fragment : Fragment() {
         currentmedRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
 
+        view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).setOnRefreshListener {
+            view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).isRefreshing = false
+            getMedicationdata()
+        }
+
         getMedicationdata()
+
+
         //RecyclerView = view.findViewById(R.id.suggestion_recyclerveiw)
         //RecyclerView.layoutManager = LinearLayoutManager(requireActivity())
        //search
@@ -71,6 +80,8 @@ class Medication_fragment : Fragment() {
     }
 
     private fun getMedicationdata() {
+        view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.VISIBLE
+        view?.findViewById<RecyclerView>(R.id.currentmed_recyclerview)?.visibility = View.GONE
         var currentMedList = mutableListOf<currentmed>()
         collRef.get().addOnSuccessListener { documents ->
             for (document in documents){
@@ -94,8 +105,11 @@ class Medication_fragment : Fragment() {
             }
             var adapter= CurrentMEdAdapter(currentMedList,true)
             currentmedRecyclerView.adapter = adapter
-
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+            view?.findViewById<RecyclerView>(R.id.currentmed_recyclerview)?.visibility = View.VISIBLE
         }.addOnFailureListener { e->
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+            view?.findViewById<RecyclerView>(R.id.currentmed_recyclerview)?.visibility = View.VISIBLE
             Toast.makeText(requireActivity(),"Failure of task $e",Toast.LENGTH_LONG).show()
         }
     }

@@ -16,6 +16,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.medease.Constants.Constants
 import com.example.medease.adapters.NewsAdapter
 import com.squareup.picasso.Picasso
@@ -31,8 +32,12 @@ class News_fragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //view.findViewById<ProgressBar>(R.id.loadingProgressBar_news).visibility = View.VISIBLE
-        view.findViewById<LinearLayoutCompat>(R.id.news_layout).visibility = View.VISIBLE
+
+        view.findViewById<SwipeRefreshLayout>(R.id.news_layout).setOnRefreshListener {
+            view.findViewById<SwipeRefreshLayout>(R.id.news_layout).isRefreshing =false
+            getNews()
+        }
+
         getNews()
 
     }
@@ -46,7 +51,8 @@ class News_fragment : Fragment() {
     }
 
     private fun getNews() {
-
+        view?.findViewById<ProgressBar>(R.id.loadingProgressBar_news)?.visibility = View.VISIBLE
+        view?.findViewById<RecyclerView>(R.id.news_recyclerView)?.visibility = View.GONE
         val retrofit =
             Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -69,8 +75,8 @@ class News_fragment : Fragment() {
                         NewsRecyclerView?.adapter = NewsAdapter(newsResponse.articles!!)
 
 
-                        //view?.findViewById<ProgressBar>(R.id.loadingProgressBar_news)?.visibility = View.GONE
-                        view?.findViewById<LinearLayoutCompat>(R.id.news_layout)?.visibility = View.VISIBLE
+                        view?.findViewById<ProgressBar>(R.id.loadingProgressBar_news)?.visibility = View.GONE
+                        NewsRecyclerView?.visibility = View.VISIBLE
                         Toast.makeText(requireActivity(),"Callback received",Toast.LENGTH_LONG).show()
 
                     }
@@ -83,7 +89,8 @@ class News_fragment : Fragment() {
 
             override fun onFailure(call: Call<NewsItem>, t: Throwable) {
                 Toast.makeText(requireActivity(),"Unable to fetch news $t",Toast.LENGTH_LONG).show()
-
+                view?.findViewById<ProgressBar>(R.id.loadingProgressBar_news)?.visibility = View.GONE
+                view?.findViewById<RecyclerView>(R.id.news_recyclerView)?.visibility = View.VISIBLE
             }
 
         })

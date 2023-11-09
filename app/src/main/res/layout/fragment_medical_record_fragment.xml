@@ -47,15 +47,31 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <ProgressBar
+        android:id="@+id/loading_bar_medrec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medication_searchbar_layout"
+        android:visibility="gone"></ProgressBar>
 
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/medication_searchbar_layout">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medrec_recyclerview"
         android:padding="5dp"
-        android:layout_below="@+id/medication_searchbar_layout"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/med_rec_item">
     </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
 

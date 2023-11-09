@@ -1,6 +1,7 @@
 package com.example.medease
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -95,6 +96,10 @@ var calljoined = false
                 calljoined = true
                 joinChannel(view)
             }
+        }
+
+        findViewById<Button>(R.id.mute_button).setOnClickListener {  view ->
+            onMuteButtonClicked(view)
         }
 
     }
@@ -195,6 +200,9 @@ var calljoined = false
             // Stop local video rendering.
             if (localSurfaceView != null) localSurfaceView.visibility = View.GONE
             isJoined = false
+
+            startActivity(Intent(this,Home::class.java))
+            finish()
         }
     }
 

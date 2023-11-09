@@ -2,6 +2,7 @@ package com.example.medease
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,6 +59,8 @@ class History : AppCompatActivity() {
     }
 
     private fun getmeddata() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.historyRecyclerview.visibility = View.GONE
         var historyMedList = mutableListOf<currentmed>()
         MedcollRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
@@ -82,13 +85,20 @@ class History : AppCompatActivity() {
             }
             var adapter = CurrentMEdAdapter(historyMedList, false)
             recyclerview.adapter = adapter
+            binding.loadingBar.visibility = View.GONE
+            binding.historyRecyclerview.visibility = View.VISIBLE
 
         }.addOnFailureListener { e ->
             Toast.makeText(this, "Failure of task $e", Toast.LENGTH_LONG).show()
+            binding.loadingBar.visibility = View.GONE
+            binding.historyRecyclerview.visibility = View.VISIBLE
         }
     }
 
     private fun getMedrecData() {
+
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.historyRecyclerview.visibility = View.GONE
         MedrecHisCollref.get().addOnSuccessListener { querySnapshot ->
             var documentList = mutableListOf<MedRec>()
             Log.d("medrecfailure", "Working till line 60 ${querySnapshot.documents.toString()}")
@@ -112,6 +122,8 @@ class History : AppCompatActivity() {
                 }
                 Log.d("medrecfailure", "Working till line 74")
                 recyclerview.adapter = medrecAdapter(documentList, false)
+                binding.loadingBar.visibility = View.GONE
+                binding.historyRecyclerview.visibility = View.VISIBLE
 
             }
 
@@ -120,11 +132,15 @@ class History : AppCompatActivity() {
 
         }.addOnFailureListener { e ->
             Toast.makeText(this, "failed to fetch med rec $e", Toast.LENGTH_LONG).show()
+            binding.loadingBar.visibility = View.GONE
+            binding.historyRecyclerview.visibility = View.VISIBLE
         }
     }
 
 
     private fun getAppointmentData() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.historyRecyclerview.visibility = View.GONE
         AppointmentcollRef.get().addOnSuccessListener { documents ->
             var appointmentlist = mutableListOf<Appointment>()
             for (document in documents) {
@@ -139,9 +155,14 @@ class History : AppCompatActivity() {
             var adapter = AppointmentsAdapter(false)
             adapter.Updatelist(appointmentlist)
             recyclerview.adapter = adapter
+
+            binding.loadingBar.visibility = View.GONE
+            binding.historyRecyclerview.visibility = View.VISIBLE
             Log.d("appointmentcrash", "failed at line 67")
         }.addOnFailureListener { e ->
             Toast.makeText(this, "Failed to retrieve  $e ", Toast.LENGTH_LONG).show()
+            binding.loadingBar.visibility = View.GONE
+            binding.historyRecyclerview.visibility = View.VISIBLE
         }
 
     }

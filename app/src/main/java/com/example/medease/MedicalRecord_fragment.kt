@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.medease.Modal.MedRec
 import com.example.medease.adapters.medrecAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -52,6 +54,11 @@ class MedicalRecord_fragment : Fragment() {
             intent.putExtra("HISTORY_TYPE","MedRec")
             startActivity(intent)
         }
+
+        view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).setOnRefreshListener {
+            view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).isRefreshing = false
+            getmedrec()
+        }
         getmedrec()
 
         addbutton.setOnClickListener {
@@ -61,6 +68,9 @@ class MedicalRecord_fragment : Fragment() {
 
     }
     private fun getmedrec(){
+
+        view?.findViewById<ProgressBar>(R.id.loading_bar_medrec)?.visibility = View.VISIBLE
+        recyclerveiw.visibility = View.GONE
         collRef.get().addOnSuccessListener { querySnapshot ->
             var documentList = mutableListOf<MedRec>()
             Log.d("medrecfailure", "Working till line 60 ${querySnapshot.documents.toString()}")
@@ -78,17 +88,24 @@ class MedicalRecord_fragment : Fragment() {
                     val medRec = MedRec(title, description.toString(), date, fileName, fileurl)
                     documentList.add(medRec)
 
+
+
                 }
-                Log.d("medrecfailure", "Working till line 74")
-                recyclerveiw.adapter = medrecAdapter(documentList,true)
+
 
             }
-
+            view?.findViewById<ProgressBar>(R.id.loading_bar_medrec)?.visibility = View.GONE
+            recyclerveiw.visibility = View.VISIBLE
+            Log.d("medrecfailure", "Working till line fhdsj0")
+            recyclerveiw.adapter = medrecAdapter(documentList,true)
 
             Log.d("medrecfailure", "Working till line 80")
 
         }.addOnFailureListener { e ->
             Toast.makeText(requireActivity(),"failed to fetch med rec $e", Toast.LENGTH_LONG).show()
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+            view?.findViewById<RecyclerView>(R.id.medrec_recyclerview)?.visibility = View.VISIBLE
+
         }
     }
 

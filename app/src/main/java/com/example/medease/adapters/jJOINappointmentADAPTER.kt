@@ -32,7 +32,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
     private val CollRef =
         db.collection("Doctors").document("Doctor Details").collection("Top Doctors")
 
-    class JoinAppointmentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class JoinAppointmentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgtext = view.findViewById<TextView>(R.id.image_textview)
         val selectedappointment = view.findViewById<CardView>(R.id.appointment_card)
         val DocName = view.findViewById<TextView>(R.id.Doctor_name)
@@ -41,7 +41,6 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
         val experience = view.findViewById<TextView>(R.id.experience)
         val address = view.findViewById<TextView>(R.id.address)
         val appointment = view.findViewById<TextView>(R.id.SHeduled_Booking)
-        val cancellation_text = view.findViewById<TextView>(R.id.cancellation_text)
         val cancel_button = view.findViewById<ExtendedFloatingActionButton>(R.id.cancel_appointment)
     }
 
@@ -62,8 +61,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
         holder.cancel_button.setText("JOIN")
         holder.cancel_button.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
 
-        if (AppointmentsAdapter.scheduledappointmentlist.isNotEmpty()) {
-            val appointment = AppointmentsAdapter.scheduledappointmentlist[position]
+            val appointment = list[position]
             val doctorId = appointment.liscenseID
 
             getDoctorData(doctorId) { fetchedDoctorDetail ->
@@ -75,7 +73,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
                 }
 
             }
-        }
+
 
 
         holder.cancel_button.setOnClickListener {

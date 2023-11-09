@@ -115,7 +115,7 @@ android:inputType="phone"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="date"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/date2"
@@ -123,7 +123,7 @@ android:inputType="phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="date"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/date3"
@@ -232,7 +232,7 @@ android:inputType="phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1:00 PM"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -38,7 +38,11 @@
         app:queryHint="Search Medicine">
     </androidx.appcompat.widget.SearchView>
 
-
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"></ProgressBar>
 
 
 

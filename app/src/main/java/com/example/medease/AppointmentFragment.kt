@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.medease.Modal.Appointment
 import com.example.medease.Modal.DoctorDetail
 import com.example.medease.adapters.AppointmentsAdapter
@@ -41,6 +43,12 @@ class AppointmentFragment : Fragment() {
 
         RecyclerView = view.findViewById(R.id.appointment_recyclerview)
         RecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+
+        view.findViewById<SwipeRefreshLayout>(R.id.swiprelayout).setOnRefreshListener {
+            view.findViewById<SwipeRefreshLayout>(R.id.swiprelayout).isRefreshing = false
+            getdata()
+        }
          getdata()
 
         view.findViewById<ImageView>(R.id.history).setOnClickListener {
@@ -58,6 +66,9 @@ class AppointmentFragment : Fragment() {
 
     private fun getdata(){
 
+
+        view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.VISIBLE
+        view?.findViewById<RecyclerView>(R.id.appointment_recyclerview)?.visibility = View.GONE
         collRef.get().addOnSuccessListener { documents ->
             var appointmentlist = mutableListOf<Appointment>()
             for (document in documents){
@@ -73,8 +84,12 @@ class AppointmentFragment : Fragment() {
             adapter.Updatelist(appointmentlist)
             RecyclerView.adapter = adapter
             Log.d("appointmentcrash","failed at line 67")
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+            view?.findViewById<RecyclerView>(R.id.appointment_recyclerview)?.visibility = View.VISIBLE
         }.addOnFailureListener { e->
             Toast.makeText(requireActivity(),"Failed to retrieve  $e ",Toast.LENGTH_LONG).show()
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+            view?.findViewById<RecyclerView>(R.id.appointment_recyclerview)?.visibility = View.VISIBLE
         }
 
     }
