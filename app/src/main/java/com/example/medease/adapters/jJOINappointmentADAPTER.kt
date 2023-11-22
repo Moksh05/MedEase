@@ -41,6 +41,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
         val experience = view.findViewById<TextView>(R.id.experience)
         val address = view.findViewById<TextView>(R.id.address)
         val appointment = view.findViewById<TextView>(R.id.SHeduled_Booking)
+        val refund = view.findViewById<TextView>(R.id.cancellation_text)
         val cancel_button = view.findViewById<ExtendedFloatingActionButton>(R.id.cancel_appointment)
     }
 
@@ -58,6 +59,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
 
 
 
+        holder.refund.visibility = View.GONE
         holder.cancel_button.setText("JOIN")
         holder.cancel_button.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
 
@@ -75,6 +77,9 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
             }
 
 
+        if (appointment.type == "offline"){
+            holder.cancel_button.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#808080"))
+        }
 
         holder.cancel_button.setOnClickListener {
 
@@ -88,11 +93,13 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
                 calendar.add(Calendar.HOUR_OF_DAY,1)
                 val endtime = timeFormat.format(calendar.time)
 
-                if (currentdate == list[position].date && (timeFormat.parse(currenttime) >= meetingstart  || timeFormat.parse(currenttime) < timeFormat.parse(endtime) )){
-                    holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
-                }else{
-                    Toast.makeText(holder.selectedappointment.context,"Cant Join Now Not the time reached",Toast.LENGTH_LONG).show()
-                    holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
+                if (appointment.type == "online"){
+                    if (currentdate == list[position].date && (timeFormat.parse(currenttime) >= meetingstart  || timeFormat.parse(currenttime) < timeFormat.parse(endtime) )){
+                        holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
+                    }else{
+                        Toast.makeText(holder.selectedappointment.context,"Cant Join Now Not the time reached",Toast.LENGTH_LONG).show()
+                        holder.selectedappointment.context.startActivity(Intent(holder.selectedappointment.context,VideoChatActivity::class.java))
+                    }
                 }
             }
 
@@ -117,8 +124,7 @@ class jJOINappointmentADAPTER(var list : MutableList<Appointment>) : RecyclerVie
         holder.clinic.text = doctorDetail.clinicName
         holder.experience.text = "${doctorDetail.experience} years of experience"
         holder.address.text = doctorDetail.address
-        holder.appointment.text =
-            "${appointment.type} booking: ${appointment.time},${appointment.date}"
+        holder.appointment.text = "${appointment.type} booking: ${appointment.time},${appointment.date}"
 
     }
 

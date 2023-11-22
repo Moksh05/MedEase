@@ -40,8 +40,8 @@ class add_edit_medrec : AppCompatActivity() {
     private lateinit var  launcher : ActivityResultLauncher<Intent>
     val collRef = db.collection("Users").document(auth.currentUser?.email.toString()).collection("Medical Records")
 
-    private lateinit var displayName:String
-    private lateinit var downloadUrl:String
+    var displayName:String? = ""
+    var downloadUrl:String? = ""
 var editable= true
     var downloaded = 0
     var formatter = SimpleDateFormat("EEE, d MMM YYYY HH:mm a")
@@ -66,8 +66,15 @@ var editable= true
 
                 binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
                 binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
-                binding.attachmentPreview.setText(MedRECInfo.fileName)
-                binding.attachmentview.visibility = View.VISIBLE
+
+                if (MedRECInfo.fileName == "" || MedRECInfo.fileName.isNullOrBlank()){
+                    binding.attachmentPreview.visibility = View.GONE
+                    binding.attachmentview.visibility = View.GONE
+                }else{
+                    binding.attachmentPreview.setText(MedRECInfo.fileName)
+                    binding.attachmentview.visibility = View.VISIBLE
+                }
+
 
                 binding.attachmentview.setOnClickListener {
                     val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
@@ -172,11 +179,7 @@ var editable= true
                                 binding.attachmentPreview.text = displayName
 
                                 // Proceed with Firestore document creation here
-                                medical = MedRec(
-                                    binding.addmedrecTittleEdittext.text.toString(),
-                                    binding.addmedrecDescEdittext.text.toString(),
-                                    formatter.format(Date()), displayName, downloadUrl
-                                )
+
 
                                 taskOngoing =0
 
@@ -198,13 +201,10 @@ var editable= true
     }
 
     private fun showfile(){
-
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "application/pdf"
 
         launcher.launch(intent)
-
-
 
     }
 

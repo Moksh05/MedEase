@@ -105,8 +105,9 @@ class Medication_fragment : Fragment() {
             }
             var adapter= CurrentMEdAdapter(currentMedList,true)
             currentmedRecyclerView.adapter = adapter
-            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
             view?.findViewById<RecyclerView>(R.id.currentmed_recyclerview)?.visibility = View.VISIBLE
+            view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
+
         }.addOnFailureListener { e->
             view?.findViewById<ProgressBar>(R.id.loading_bar)?.visibility = View.GONE
             view?.findViewById<RecyclerView>(R.id.currentmed_recyclerview)?.visibility = View.VISIBLE

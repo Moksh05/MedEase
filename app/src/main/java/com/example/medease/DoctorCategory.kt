@@ -67,16 +67,6 @@ class DoctorCategory : AppCompatActivity() {
             intent.putExtra("CATEGORY_NAME", "Pulmologist")
             startActivity(intent)
         }
-        binding.doccategoryLayout7.setOnClickListener {
-            val intent = Intent(this, DoctorListActivity::class.java)
-            intent.putExtra("CATEGORY_NAME", "Pulmologist")
-            startActivity(intent)
-        }
-        binding.doccategoryLayout8.setOnClickListener {
-            val intent = Intent(this, DoctorListActivity::class.java)
-            intent.putExtra("CATEGORY_NAME", "Pulmologist")
-            startActivity(intent)
-        }
 
 
 

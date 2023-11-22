@@ -69,18 +69,19 @@ class medrecAdapter(val medreclist: MutableList<MedRec>,val deletable : Boolean)
                 builder.setMessage("Are you sure you want to delete this medication?")
                 builder.setPositiveButton("Yes") { _, _ ->
                     // Handle the delete confirmation
-                    medreclist.removeAt(position)
-                    notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, medreclist.size)
+
 
                     // Perform the actual delete operation (e.g., from Firebase Firestore)
                     collRef.document(medData.Tittle).delete().addOnSuccessListener {
+                        medreclist.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, medreclist.size)
                         Toast.makeText(holder.selectedmedrec.context, "Record Deleted", Toast.LENGTH_SHORT).show()
                     }.addOnFailureListener {
                         Toast.makeText(holder.selectedmedrec.context, "Failed to delete record", Toast.LENGTH_SHORT).show()
                     }
-                    if (medreclist[position].fileurl!=null){
-                        storageref.getReferenceFromUrl(medreclist[position].fileurl).delete().addOnSuccessListener {
+                    if (!(medreclist[position].fileurl == "")){
+                        storageref.getReferenceFromUrl(medreclist[position].fileurl!!).delete().addOnSuccessListener {
                             Toast.makeText(holder.selectedmedrec.context, "record pdf deleted Deleted", Toast.LENGTH_SHORT).show()
                         }.addOnFailureListener {
                             Toast.makeText(holder.selectedmedrec.context, "failed to delete record pdf", Toast.LENGTH_SHORT).show()

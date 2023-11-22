@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import com.example.medease.Modal.Profiledata
 import com.example.medease.databinding.ActivityHomeBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -50,7 +51,11 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setSupportActionBar(binding.supportToolbar)
+        supportActionBar?.title = "MedEase"
+
+        var bottomnav = binding.bottomNavigationView
 
         docref.get().addOnSuccessListener { document->
             if (document.exists()) {
@@ -77,49 +82,43 @@ class Home : AppCompatActivity() {
             Toast.makeText(this,"failed to get Profile ",Toast.LENGTH_SHORT).show()
         }
 
-        val toggle = ActionBarDrawerToggle(
-            this,
-            binding.drawerlayout,
-            binding.supportToolbar,
-            R.string.opn,
-            R.string.cln
-        )
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,Home_fragment()).commit()
-        binding.sidenavvieew.setCheckedItem(R.id.menu_home)
-        binding.drawerlayout.addDrawerListener(toggle)
-        toggle.syncState()
 
-        binding.sidenavvieew.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener{
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when (item.itemId){
-                    R.id.menu_logout -> signout()
-                    R.id.menu_News -> {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, News_fragment()).commit()
-
-                        supportActionBar?.title = "MedNews"
-                    }
-                    R.id.menu_home -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container,Home_fragment()).commit()
-                    supportActionBar?.title = "MedEase"}
-                    R.id.menu_medication -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container,Medication_fragment()).commit()
-                        supportActionBar?.title = "Medications"}
-                    R.id.menu_medrec -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MedicalRecord_fragment()).commit()
-                        supportActionBar?.title = "Medical Records"}
-                    R.id.menu_find_med_fac -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MapsFragment()).commit()
-                        supportActionBar?.title = "Find Medical Facility"}
-                    R.id.menu_appointments -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container,AppointmentFragment()).commit()
-                        supportActionBar?.title = "Schedule Appointment"}
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            var fragment: Fragment? = null
+            when (it.itemId) {
+                R.id.menu_home -> {
+                    fragment = Home_fragment()
+                    supportActionBar?.title = "MedEase"
                 }
-                binding.drawerlayout.closeDrawers()
-                return true
+                R.id.menu_medication -> {
+                    fragment = Medication_fragment()
+                    supportActionBar?.title = "Medications"
+                }
+                R.id.menu_medrec -> {
+                    fragment = MedicalRecord_fragment()
+                    supportActionBar?.title = "Medical Records"
+                }
+                R.id.menu_profile -> {
+                    fragment = MapsFragment()
+                    supportActionBar?.title = "Find Medical Facility"
+                }
+                R.id.menu_appointments -> {
+                    fragment = AppointmentFragment()
+                    supportActionBar?.title = "Schedule Appointment"
+                }
             }
 
+            if (fragment != null) {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                return@setOnItemSelectedListener true
+            }
 
-        })
-        val sidenavHeader = binding.sidenavvieew.getHeaderView(0)
-        val sideUsername = sidenavHeader.findViewById<TextView>(R.id.Side_nav_username)
-        sideUsername.text = user?.displayName
+            return@setOnItemSelectedListener false
+        }
+
+
 
 
 
@@ -143,7 +142,6 @@ class Home : AppCompatActivity() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.toolbar_menu,menu)
@@ -153,8 +151,10 @@ class Home : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
-            R.id.toolbar_profile -> TODO("Start the next activity when clicked and show profile there there")
+            R.id.toolbar_profile -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MapsFragment()).commit()
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }

@@ -10,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.graphics.createBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medease.Modal.Appointment
-import com.example.medease.adapters.AppointmentsAdapter
 import com.example.medease.adapters.jJOINappointmentADAPTER
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -46,7 +44,7 @@ private lateinit var recyclerView: RecyclerView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sideusername = view.findViewById<TextView>(R.id.testtext)
+        val sideusername = view.findViewById<TextView>(R.id.Hellouser)
         val Signoutbutton = view.findViewById<Button>(R.id.signout)
         recyclerView = view.findViewById(R.id.join_appointment_recyclerview)
 
@@ -58,7 +56,7 @@ private lateinit var recyclerView: RecyclerView
 
         mygooglesigninclient = GoogleSignIn.getClient(requireActivity(), gso)
         if (FirebaseAuth.getInstance().currentUser != null) {
-            sideusername.text = "Hello ${FirebaseAuth.getInstance().currentUser?.displayName}"
+            sideusername.text = "Hello!\n${FirebaseAuth.getInstance().currentUser?.displayName}"
         }
 
         Signoutbutton.setOnClickListener {

@@ -16,44 +16,15 @@
             android:id="@+id/menu_medication"
             android:icon="@drawable/icon_medication">
         </item>
-        <item android:title="Telemedicine"
-            android:id="@+id/menu_Telemedicine"
-            android:icon="@drawable/icon_telemedicine">
-        </item>
-        <item android:title="Find Medical Services"
-            android:id="@+id/menu_find_med_fac"
-            android:icon="@drawable/icon_findplaces">
-        </item>
-        <item android:title="Symptom Checker"
-            android:id="@+id/menu_symptom_checker"
-            android:icon="@drawable/icon_symptomchecker">
-        </item>
         <item android:title="Medical Records"
             android:id="@+id/menu_medrec"
             android:icon="@drawable/icon_medrecords">
         </item>
-        <item android:title="News"
-            android:id="@+id/menu_News"
-            android:icon="@drawable/icon_news">
+        <item android:title="Profile"
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/profile">
         </item>
-        <item android:title=""
-            android:checkable="false"></item>
 
     </group>
-<item android:title="Contact Us">
-    <menu >
 
-        <item
-            android:icon="@drawable/icon_help"
-            android:title="Help Centre"
-            android:id="@+id/menu_help">
-        </item>
-
-        <item android:title="LogOUt"
-            android:id="@+id/menu_logout"
-            android:icon="@drawable/icon_logout">
-        </item>
-
-    </menu>
-</item>
 </menu>

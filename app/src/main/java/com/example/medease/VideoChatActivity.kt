@@ -38,7 +38,7 @@ class VideoChatActivity : AppCompatActivity() {
     // Fill the App ID of your project generated on Agora Console.
     val appId = "873c51309e14457582e9af3da140a064"
 var calljoined = false
-
+var video = true
     var isMuted = false
     // Fill the channel name.
 // Fill the channel name.
@@ -46,8 +46,7 @@ var calljoined = false
 
     // Fill the temp token generated on Agora Console.
 // Fill the temp token generated on Agora Console.
-    val token = "007eJxTYDCNefLjonFTgG5V+qFdHl+v+ObFXVsgFZ9x7bDPo6lp/mwKDBbmxsmmhsYGlqmGJiam5qYWRqmWiWnGKYmGJgaJBmYmHru8UhsCGRmEDfwZGKEQxGdn8E1NcU0sTmVgAACsSB8p"
-
+    val token = "007eJxTYMh9Jskvq824RedJpuQfMZXyugXdxy8+KOmd4Ma1tsMqxVSBwcLcONnU0NjAMtXQxMTU3NTCKNUyMc04JdHQxCDRwMzkvn9cakMgI0OsdhgrIwMEgvjsDL6pKa6JxakMDADJgx0W"
     // An integer that identifies the local user.
 // An integer that identifies the local user.
     val uid = 0
@@ -86,17 +85,43 @@ var calljoined = false
             ActivityCompat.requestPermissions(this, REQUESTED_PERMISSIONS, PERMISSION_REQ_ID);
         }
 
+        findViewById<Button>(R.id.end_call_button).setText("Join")
         setupVideoSDKEngine()
+
+
+        findViewById<Button>(R.id.video_button).setOnClickListener { view ->
+            video = !video // Toggle the video state
+
+            // Enable or disable local video based on the state
+            agoraEngine.enableLocalVideo(video)
+
+            if (!video) {
+                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.GONE
+                localSurfaceView.visibility = View.GONE
+                findViewById<Button>(R.id.video_button).setText("Turn On")
+            } else {
+                // If video is turned on, show the localSurfaceView
+                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.VISIBLE
+                localSurfaceView.visibility = View.VISIBLE
+                findViewById<Button>(R.id.video_button).setText("Turn off")
+
+            }
+        }
 
         findViewById<Button>(R.id.end_call_button).setOnClickListener{ view->
             if (calljoined){
                 calljoined = false
                 leaveChannel(view)
+
+                startActivity((Intent(this,Home::class.java)))
             }else {
                 calljoined = true
+                findViewById<Button>(R.id.end_call_button).setText("End")
                 joinChannel(view)
             }
         }
+
+
 
         findViewById<Button>(R.id.mute_button).setOnClickListener {  view ->
             onMuteButtonClicked(view)
@@ -113,10 +138,12 @@ var calljoined = false
             agoraEngine = RtcEngine.create(config)
             // By default, the video module is disabled, call enableVideo to enable it.
             agoraEngine.enableVideo()
+            setupLocalVideo()
         } catch (e: Exception) {
             showMessage(e.toString())
         }
     }
+
 
     private val mRtcEventHandler: IRtcEngineEventHandler = object : IRtcEngineEventHandler() {
         // Listen for the remote host joining the channel to get the uid of the host.
@@ -191,7 +218,7 @@ var calljoined = false
 
     fun leaveChannel(view: View?) {
         if (!isJoined) {
-            showMessage("Join a channel first")
+
         } else {
             agoraEngine.leaveChannel()
             showMessage("You left the channel")
@@ -208,6 +235,7 @@ var calljoined = false
 
 
     fun onMuteButtonClicked(view: View) {
+        isMuted = !isMuted
         if (!isMuted) {
             agoraEngine.muteLocalAudioStream(false) // Unmute audio
             view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(

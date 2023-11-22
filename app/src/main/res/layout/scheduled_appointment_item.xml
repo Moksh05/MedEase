@@ -159,7 +159,8 @@
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/cancel_appointment"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"
                 android:text="Cancel Booking"
                 android:textStyle="bold"
                 android:textColor="@color/white"

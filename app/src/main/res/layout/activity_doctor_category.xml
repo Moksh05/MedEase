@@ -47,6 +47,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
+                android:weightSum="3"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -54,9 +55,11 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:padding="5dp">
 
@@ -78,7 +81,9 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
@@ -89,7 +94,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
+                        android:src="@drawable/cardiologist"></ImageView>
 
                     <TextView
                         android:layout_width="80dp"
@@ -103,7 +108,9 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
 
                     android:background="@color/white"
@@ -115,7 +122,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
+                        android:src="@drawable/ent"></ImageView>
 
                     <TextView
                         android:layout_width="80dp"
@@ -127,9 +134,22 @@
                         android:textStyle="bold"></TextView>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
@@ -140,7 +160,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
+                        android:src="@drawable/dermatologist"></ImageView>
 
                     <TextView
                         android:layout_width="80dp"
@@ -152,18 +172,11 @@
                         android:textStyle="bold"></TextView>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
@@ -174,7 +187,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
+                        android:src="@drawable/neurologist"></ImageView>
 
                     <TextView
                         android:layout_width="80dp"
@@ -188,7 +201,9 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/doccategory_layout6"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
@@ -199,7 +214,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
+                        android:src="@drawable/general"></ImageView>
 
                     <TextView
                         android:layout_width="80dp"
@@ -211,55 +226,7 @@
                         android:textStyle="bold"></TextView>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/doccategory_layout7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:padding="5dp">
 
-                    <ImageView
-
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:text="Radiologist"
-                        android:textAlignment="center"
-                        android:textColor="#5C5B5B"
-                        android:textSize="12dp"
-                        android:textStyle="bold"></TextView>
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/doccategory_layout8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <ImageView
-
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/pulmonologist_icon"></ImageView>
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:text="Orthopedic"
-                        android:textAlignment="center"
-                        android:textColor="#5C5B5B"
-                        android:textSize="12dp"
-                        android:textStyle="bold"></TextView>
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

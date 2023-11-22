@@ -66,7 +66,7 @@ class DoctorListAdapter(var DoctorList: MutableList<DoctorDetail>) :
             Toast.makeText(holder.selecteddoc.context,"${DoctorList[position].fee}",Toast.LENGTH_LONG).show()
             val intent = Intent(holder.selecteddoc.context, BookingActivity::class.java)
             intent.putExtra("SELECTED_DOC", DoctorList[position].licenseNumber)
-            intent.putExtra("BOOKING_TYPE","offline")
+            intent.putExtra("BOOKING_TYPE","online")
             intent.putExtra("FEE", DoctorList[position].fee)
             holder.selecteddoc.context.startActivity(intent)
         }

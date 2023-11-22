@@ -18,16 +18,17 @@
 
 
         <FrameLayout
-            android:background="@color/colorsecondary_blue"
+
             android:id="@+id/remote_video_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#2E2E2E">
 
 
         </FrameLayout>
 
         <FrameLayout
-            android:background="@color/colorPrimary_blue"
+            android:background="@color/black"
             android:id="@+id/local_video_view"
             android:layout_width="150dp"
             android:layout_margin="20dp"
