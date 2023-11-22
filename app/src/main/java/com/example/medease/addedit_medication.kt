@@ -251,7 +251,7 @@ class addedit_medication : AppCompatActivity() {
             binding.addmedicationButton.setOnClickListener {
 
 
-                if (binding.MedicineName.text.isNullOrBlank() && binding.DosaGE.text.isNullOrBlank() && binding.numberodDays.text.isNullOrBlank()) {
+                if (binding.MedicineName.text.isNullOrBlank() && binding.DosaGE.text.isNullOrBlank() && binding.numberodDays.text.isNullOrBlank() && selectedtimes.isEmpty()) {
                     Toast.makeText(this, "Please Fill the required", Toast.LENGTH_LONG).show()
                 }else{
                     val data = currentmed(

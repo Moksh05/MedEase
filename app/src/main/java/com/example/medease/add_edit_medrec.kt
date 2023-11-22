@@ -28,6 +28,7 @@ import java.util.Date
 class add_edit_medrec : AppCompatActivity() {
 
 
+    private lateinit var medical : MedRec
     var taskOngoing = 0
     private lateinit var binding: ActivityAddEditMedrecBinding
     private lateinit var uri:Uri
@@ -43,7 +44,7 @@ class add_edit_medrec : AppCompatActivity() {
     private lateinit var downloadUrl:String
 var editable= true
     var downloaded = 0
-
+    var formatter = SimpleDateFormat("EEE, d MMM YYYY HH:mm a")
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +53,7 @@ var editable= true
         setContentView(binding.root)
 
 
-        var formatter = SimpleDateFormat("EEE, d MMM YYYY HH:mm a")
+
 
 
         val selectedMedrecJson = intent.getStringExtra("SELECTED_MEDREC")
@@ -130,6 +131,8 @@ var editable= true
         }else{
             binding.doneButtonMedrec.setOnClickListener {
                 if (taskOngoing == 0){
+                    adddata()
+                    setdata()
                     onBackPressed()
                 }else{
                     Toast.makeText(this,"Please wait the task is being done",Toast.LENGTH_SHORT).show()
@@ -169,29 +172,12 @@ var editable= true
                                 binding.attachmentPreview.text = displayName
 
                                 // Proceed with Firestore document creation here
-                                val MedicalRecord = MedRec(
+                                medical = MedRec(
                                     binding.addmedrecTittleEdittext.text.toString(),
                                     binding.addmedrecDescEdittext.text.toString(),
                                     formatter.format(Date()), displayName, downloadUrl
                                 )
 
-                                collRef.document(binding.addmedrecTittleEdittext.text.toString())
-                                    .set(MedicalRecord)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this, "MEDICAL RECORD UPLOADED", Toast.LENGTH_SHORT).show()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(this, "Error occurred, unable to upload: $e", Toast.LENGTH_SHORT).show()
-                                    }
-
-                                MedrecHisCollref.document(binding.addmedrecTittleEdittext.text.toString())
-                                    .set(MedicalRecord)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this, "MEDICAL RECORD UPLOADED to history", Toast.LENGTH_SHORT).show()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(this, "Error occurred, unable to upload in history: $e", Toast.LENGTH_SHORT).show()
-                                    }
                                 taskOngoing =0
 
                             }
@@ -222,4 +208,30 @@ var editable= true
 
     }
 
+    private fun adddata(){
+        medical = MedRec(
+            binding.addmedrecTittleEdittext.text.toString(),
+            binding.addmedrecDescEdittext.text.toString(),
+            formatter.format(Date()), displayName, downloadUrl
+        )
+    }
+    private fun setdata(){
+        collRef.document(binding.addmedrecTittleEdittext.text.toString())
+            .set(medical)
+            .addOnSuccessListener {
+                Toast.makeText(this, "MEDICAL RECORD UPLOADED", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error occurred, unable to upload: $e", Toast.LENGTH_SHORT).show()
+            }
+
+        MedrecHisCollref.document(binding.addmedrecTittleEdittext.text.toString())
+            .set(medical)
+            .addOnSuccessListener {
+                Toast.makeText(this, "MEDICAL RECORD UPLOADED to history", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error occurred, unable to upload in history: $e", Toast.LENGTH_SHORT).show()
+            }
+    }
 }

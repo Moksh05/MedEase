@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medease.BookingActivity
@@ -46,6 +47,8 @@ class DoctorListAdapter(var DoctorList: MutableList<DoctorDetail>) :
     }
 
     override fun onBindViewHolder(holder: DoctorListViewHolder, position: Int) {
+
+
         holder.DocName.text = DoctorList[position].name
         holder.clinic.text = DoctorList[position].clinicName
         holder.txtuimg.text = DoctorList[position].name.substring(4, 6).uppercase()
@@ -60,6 +63,7 @@ class DoctorListAdapter(var DoctorList: MutableList<DoctorDetail>) :
             holder.selecteddoc.context.startActivity(intent)
         }
         holder.online.setOnClickListener {
+            Toast.makeText(holder.selecteddoc.context,"${DoctorList[position].fee}",Toast.LENGTH_LONG).show()
             val intent = Intent(holder.selecteddoc.context, BookingActivity::class.java)
             intent.putExtra("SELECTED_DOC", DoctorList[position].licenseNumber)
             intent.putExtra("BOOKING_TYPE","offline")

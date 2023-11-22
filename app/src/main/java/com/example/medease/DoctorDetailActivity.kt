@@ -54,6 +54,7 @@ class DoctorDetailActivity : AppCompatActivity() {
                         var intent = Intent(this,BookingActivity::class.java)
                         intent.putExtra("BOOKING_TYPE","online")
                         intent.putExtra("SELECTED_DOC",doctor.licenseNumber)
+                        intent.putExtra("FEE", doctor.fee)
                         startActivity(intent)
                     }
 
