@@ -78,7 +78,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/icon_medrecords"
+                        android:src="@drawable/icon_findplaces"
                         app:tint = "#6C6B6B"></ImageView>
 
                     <TextView

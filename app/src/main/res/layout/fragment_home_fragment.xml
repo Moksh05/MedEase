@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
-    android:padding="5dp"
     android:layout_marginTop="?attr/actionBarSize"
     android:background="#4DCEE8FB"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:padding="5dp"
     tools:context=".Home_fragment">
 
 
@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
 
         <TextView
@@ -25,71 +25,184 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello!\nUsername"
-            android:textStyle="bold"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp"
+            android:textStyle="bold"></TextView>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="10"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/medicationcard"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_margin="5dp"
                 android:layout_weight="5"
-                app:cardCornerRadius="10dp"
                 android:elevation="5dp"
-                android:layout_margin="5dp"></androidx.cardview.widget.CardView>
+                app:cardCornerRadius="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient1"
+                    android:gravity="start"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="-20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/medication"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medications"
+                        android:textColor="@color/white"
+                        android:textSize="24dp"></TextView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/medreccard"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_margin="5dp"
                 android:layout_weight="5"
-                app:cardCornerRadius="10dp"
                 android:elevation="5dp"
-                android:layout_margin="5dp"></androidx.cardview.widget.CardView>
+                app:cardCornerRadius="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient1"
+                    android:gravity="start"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="-5dp"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/medrec"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Med Record"
+                        android:textColor="@color/white"
+                        android:textSize="24dp"></TextView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upcoming APpointments"
-            android:textStyle="bold"
             android:layout_gravity="start"
-            android:textSize="23dp"></TextView>
+            android:text="Medical Articles"
+            android:textSize="23dp"
+            android:textStyle="bold"></TextView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/news_card"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="10dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="10">
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="3"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mednewscard"></ImageView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Read Latest News Article in medical field"
+                    android:textSize="22dp"></TextView>
+
+               <ImageView
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:src="@drawable/next_icon"
+                   app:tint="#5A5A5A"></ImageView>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Upcoming Appointments"
+            android:textSize="23dp"
+            android:textStyle="bold"></TextView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/join_appointment_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="8dp"
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="true"
             app:stackFromEnd="true"
-            android:padding="8dp"
-            android:id="@+id/join_appointment_recyclerview"
-            tools:listitem="@layout/scheduled_appointment_item">
-        </androidx.recyclerview.widget.RecyclerView>
-
-
-
+            tools:listitem="@layout/scheduled_appointment_item"></androidx.recyclerview.widget.RecyclerView>
 
 
         <Button
             android:id="@+id/signout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Signout"></Button>
-
-        <Button
-            android:id="@+id/join"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="join"></Button>
+            android:text="Sign out"></Button>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

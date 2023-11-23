@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medease.Modal.Appointment
@@ -17,14 +18,12 @@ import com.example.medease.adapters.jJOINappointmentADAPTER
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 class Home_fragment : Fragment() {
 
@@ -43,6 +42,7 @@ private lateinit var recyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
 
         val sideusername = view.findViewById<TextView>(R.id.Hellouser)
         val Signoutbutton = view.findViewById<Button>(R.id.signout)
@@ -63,9 +63,23 @@ private lateinit var recyclerView: RecyclerView
             signout()
         }
 
-        view.findViewById<Button>(R.id.join).setOnClickListener{
-            val intent = Intent(requireActivity(), VideoChatActivity::class.java)
-            startActivity(intent)
+
+        view.findViewById<CardView>(R.id.medicationcard).setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container,Medication_fragment()).commit()
+
+            navView.selectedItemId = R.id.menu_medication
+        }
+        view.findViewById<CardView>(R.id.medreccard).setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MedicalRecord_fragment()).commit()
+
+            // Update the selected item in the bottom navigation
+            navView.selectedItemId = R.id.menu_medrec // Replace with the ID of the desired navigation item
+
+        }
+
+        view.findViewById<CardView>(R.id.news_card).setOnClickListener {
+            requireActivity().startActivity(Intent(requireActivity(),NewsArticles::class.java))
+
         }
 
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.HORIZONTAL,true)

@@ -27,7 +27,7 @@ class Home : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     val user = auth.currentUser
     val db = FirebaseFirestore.getInstance()
-    val docref = db.collection("Users").document(user?.email.toString())
+    val docref = db.collection("Users").document(user?.email.toString()).collection("Profile").document("Profile")
 
     private lateinit var mygooglesigninclient: GoogleSignInClient
 
@@ -60,7 +60,7 @@ class Home : AppCompatActivity() {
         docref.get().addOnSuccessListener { document->
             if (document.exists()) {
                 // Document exists, update it with the new data
-                docref.collection("Profile").document("Profile").update("Name",user?.displayName.toString())
+                docref.update("name",user?.displayName.toString())
                     .addOnSuccessListener {
                         Toast.makeText(this,"Profile updated succesfuly",Toast.LENGTH_SHORT).show()
 
@@ -70,7 +70,8 @@ class Home : AppCompatActivity() {
                     }
             } else {
                 // Document doesn't exist, create it with the new data
-                docref.collection("Profile").document("Profile").set(hashMapOf("Name" to user?.displayName.toString()))
+                val profiledata = Profiledata(user?.displayName.toString(),"Empty","Empty","Empty","Empty")
+                docref.set(profiledata)
                     .addOnSuccessListener {
                         Toast.makeText(this,"success to add Profile ",Toast.LENGTH_SHORT).show()
                     }
@@ -101,7 +102,7 @@ class Home : AppCompatActivity() {
                     supportActionBar?.title = "Medical Records"
                 }
                 R.id.menu_profile -> {
-                    fragment = MapsFragment()
+                    fragment = ProfileFragment()
                     supportActionBar?.title = "Find Medical Facility"
                 }
                 R.id.menu_appointments -> {
@@ -151,7 +152,8 @@ class Home : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
-            R.id.toolbar_profile -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MapsFragment()).commit()
+            R.id.toolbar_profile -> {supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProfileFragment()).commit()
+            binding.bottomNavigationView.selectedItemId = R.id.menu_profile}
         }
         return super.onOptionsItemSelected(item)
     }

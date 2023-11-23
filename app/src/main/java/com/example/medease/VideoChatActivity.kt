@@ -240,11 +240,12 @@ var video = true
             agoraEngine.muteLocalAudioStream(false) // Unmute audio
             view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
                 Color.parseColor("#FA0000"))
+            view.findViewById<Button>(R.id.mute_button).setText("Mute")
         } else {
             agoraEngine.muteLocalAudioStream(true) // Mute audio
             view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
                 Color.RED)
-            view.findViewById<Button>(R.id.mute_button).setText("Muted")
+            view.findViewById<Button>(R.id.mute_button).setText("UnMute")
         }
     }
 
