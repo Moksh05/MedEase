@@ -58,8 +58,8 @@ var editable= true
 
         val selectedMedrecJson = intent.getStringExtra("SELECTED_MEDREC")
         if (selectedMedrecJson!=null){
-            val gson = Gson()
-            val MedRECInfo = gson.fromJson(selectedMedrecJson,MedRec::class.java)
+                val gson = Gson()
+                val MedRECInfo = gson.fromJson(selectedMedrecJson,MedRec::class.java)
 
             if (intent.getBooleanExtra("EDITABLE",true)){
 
@@ -72,6 +72,7 @@ var editable= true
                     binding.attachmentview.visibility = View.GONE
                 }else{
                     binding.attachmentPreview.setText(MedRECInfo.fileName)
+                    binding.attachmentview.visibility = View.VISIBLE
                     binding.attachmentview.visibility = View.VISIBLE
                 }
 

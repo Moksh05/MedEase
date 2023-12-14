@@ -69,13 +69,6 @@ private lateinit var recyclerView: RecyclerView
 
             navView.selectedItemId = R.id.menu_medication
         }
-        view.findViewById<CardView>(R.id.medreccard).setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MedicalRecord_fragment()).commit()
-
-            // Update the selected item in the bottom navigation
-            navView.selectedItemId = R.id.menu_medrec // Replace with the ID of the desired navigation item
-
-        }
 
         view.findViewById<CardView>(R.id.news_card).setOnClickListener {
             requireActivity().startActivity(Intent(requireActivity(),NewsArticles::class.java))

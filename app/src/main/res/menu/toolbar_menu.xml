@@ -2,6 +2,8 @@
 <menu  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
     <item android:visible="true"
         android:id="@+id/toolbar_profile"
         android:title="Profile"
@@ -9,4 +11,6 @@
         android:icon="@drawable/profile"
         app:showAsAction="always">
     </item>
+
+
 </menu>

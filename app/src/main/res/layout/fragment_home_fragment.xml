@@ -28,99 +28,45 @@
             android:textSize="30dp"
             android:textStyle="bold"></TextView>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.cardview.widget.CardView
+            android:id="@+id/medicationcard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:elevation="5dp"
+            app:cardCornerRadius="10dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/medicationcard"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="5dp"
-                android:layout_weight="5"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient1"
-                    android:gravity="start"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="-20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/medication"></ImageView>
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginLeft="-20dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/medication"></ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textColor="@color/white"
-                        android:textSize="25dp"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Medications"
-                        android:textColor="@color/white"
-                        android:textSize="24dp"></TextView>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schedule Your Medicines"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="30dp"></TextView>
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/medreccard"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="5dp"
-                android:layout_weight="5"
-                android:elevation="5dp"
-                app:cardCornerRadius="10dp">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient1"
-                    android:gravity="start"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginLeft="-5dp"
-                        android:padding="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/medrec"></ImageView>
+        </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textColor="@color/white"
-                        android:textSize="25dp"></TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Med Record"
-                        android:textColor="@color/white"
-                        android:textSize="24dp"></TextView>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.cardview.widget.CardView>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:layout_width="wrap_content"

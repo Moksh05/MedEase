@@ -61,7 +61,7 @@ class CurrentMEdAdapter(val CurrentMedList: MutableList<currentmed>,val deleteab
         } else {
             holder.intruction.text = "Before Meal"
         }
-        holder.medicinenameimg.text = medData.MedName.substring(0, 2).uppercase()
+        holder.medicinenameimg.text = medData.MedName.substring(0, 1).uppercase()
 
         holder.selectedMed.setOnClickListener {
             val jsondata = Gson().toJson(medData)

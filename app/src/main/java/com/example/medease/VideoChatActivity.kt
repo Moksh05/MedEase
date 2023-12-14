@@ -46,8 +46,8 @@ var video = true
 
     // Fill the temp token generated on Agora Console.
 // Fill the temp token generated on Agora Console.
-    val token = "007eJxTYMh9Jskvq824RedJpuQfMZXyugXdxy8+KOmd4Ma1tsMqxVSBwcLcONnU0NjAMtXQxMTU3NTCKNUyMc04JdHQxCDRwMzkvn9cakMgI0OsdhgrIwMEgvjsDL6pKa6JxakMDADJgx0W"
-    // An integer that identifies the local user.
+    val token = "007eJxTYIhUDhZRDJ0R87K7TjiEu8BG2SBbIz8m6kxf49ruHq+rnxUYLMyNk00NjQ0sUw1NTEzNTS2MUi0T04xTEg1NDBINzEx6dBJSGwIZGfQ2xzEzMkAgiM/O4Jua4ppYnMrAAAB0wxxZ"
+    //that identifies the local user.
 // An integer that identifies the local user.
     val uid = 0
     var isJoined = false
@@ -89,24 +89,24 @@ var video = true
         setupVideoSDKEngine()
 
 
-        findViewById<Button>(R.id.video_button).setOnClickListener { view ->
-            video = !video // Toggle the video state
-
-            // Enable or disable local video based on the state
-            agoraEngine.enableLocalVideo(video)
-
-            if (!video) {
-                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.GONE
-                localSurfaceView.visibility = View.GONE
-                findViewById<Button>(R.id.video_button).setText("Turn On")
-            } else {
-                // If video is turned on, show the localSurfaceView
-                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.VISIBLE
-                localSurfaceView.visibility = View.VISIBLE
-                findViewById<Button>(R.id.video_button).setText("Turn off")
-
-            }
-        }
+//        findViewById<Button>(R.id.video_button).setOnClickListener { view ->
+//            video = !video // Toggle the video state
+//
+//            // Enable or disable local video based on the state
+//            agoraEngine.enableLocalVideo(video)
+//
+//            if (!video) {
+//                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.GONE
+//                localSurfaceView.visibility = View.GONE
+//                findViewById<Button>(R.id.video_button).setText("Turn On")
+//            } else {
+//                // If video is turned on, show the localSurfaceView
+//                findViewById<FrameLayout>(R.id.local_video_view).visibility = View.VISIBLE
+//                localSurfaceView.visibility = View.VISIBLE
+//                findViewById<Button>(R.id.video_button).setText("Turn off")
+//
+//            }
+//        }
 
         findViewById<Button>(R.id.end_call_button).setOnClickListener{ view->
             if (calljoined){
@@ -123,9 +123,7 @@ var video = true
 
 
 
-        findViewById<Button>(R.id.mute_button).setOnClickListener {  view ->
-            onMuteButtonClicked(view)
-        }
+
 
     }
 
@@ -234,20 +232,20 @@ var video = true
     }
 
 
-    fun onMuteButtonClicked(view: View) {
-        isMuted = !isMuted
-        if (!isMuted) {
-            agoraEngine.muteLocalAudioStream(false) // Unmute audio
-            view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
-                Color.parseColor("#FA0000"))
-            view.findViewById<Button>(R.id.mute_button).setText("Mute")
-        } else {
-            agoraEngine.muteLocalAudioStream(true) // Mute audio
-            view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
-                Color.RED)
-            view.findViewById<Button>(R.id.mute_button).setText("UnMute")
-        }
-    }
+//    fun onMuteButtonClicked(view: View) {
+//        isMuted = !isMuted
+//        if (!isMuted) {
+//            agoraEngine.muteLocalAudioStream(false) // Unmute audio
+//            view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
+//                Color.parseColor("#FA0000"))
+//            view.findViewById<Button>(R.id.mute_button).setText("Mute")
+//        } else {
+//            agoraEngine.muteLocalAudioStream(true) // Mute audio
+//            view.findViewById<Button>(R.id.mute_button).backgroundTintList = ColorStateList.valueOf(
+//                Color.RED)
+//            view.findViewById<Button>(R.id.mute_button).setText("UnMute")
+//        }
+//    }
 
 
     override fun onDestroy() {
