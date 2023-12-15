@@ -5,6 +5,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
+
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -81,6 +82,7 @@ class NotificationReceiver : BroadcastReceiver() {
             stopIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+        
 
         // Create a MediaStyle for the notification
         val mediaStyle = androidx.media.app.NotificationCompat.MediaStyle()
