@@ -77,7 +77,7 @@ class MedicalRecord_fragment : Fragment() {
             for (document in querySnapshot){
 
                 if (document!= null){
-                    Toast.makeText(requireActivity(),"${document.id}",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireActivity(),"${document.id}",Toast.LENGTH_SHORT).show()
                     val title = document.getString("tittle")?: ""
                     val description = document.get("description")?:""
                     Log.d("medrecfailure", " line 67 $description  hii ${document.get("description")}")

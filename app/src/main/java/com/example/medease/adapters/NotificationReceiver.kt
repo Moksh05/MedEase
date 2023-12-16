@@ -24,7 +24,7 @@ import com.example.medease.R
 import com.example.medease.notificationacitivity
 import java.util.Random
 
-const val title = "Medicine Reminder"
+const val title = "Dosage Reminder"
 const val ChannelID = "MedEase"
 
 
@@ -45,71 +45,71 @@ class NotificationReceiver : BroadcastReceiver() {
         val i = Intent(context, notificationacitivity::class.java)
 
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        //val pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
 
-        //only notification right now
+//        only notification right now
 //my original code
 
-//        val builder = NotificationCompat.Builder(context, ChannelID)
-//            .setSmallIcon(R.drawable.ic_launcher_background)
-//            .setContentTitle(title)
-//            .setContentText("Its Almost time to take you $notificationText medicine at $selectedTime")
-//            .setAutoCancel(true)
-//            .setDefaults(NotificationCompat.DEFAULT_ALL)
-//            .setPriority(NotificationCompat.PRIORITY_HIGH)
-//            .setContentIntent(pendingIntent)
-//
-//        val notificationManager = NotificationManagerCompat.from(context)
-//        notificationManager.notify(notificationID, builder.build())
-//
+        val builder = NotificationCompat.Builder(context, ChannelID)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle(title)
+            .setContentText("Its time to take your $notificationText at $selectedTime")
+            .setAutoCancel(true)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(notificationID, builder.build())
+
 //        context.startActivity(i)
 
 
 
 
 
-        //new code to try
-        val notificationManager = NotificationManagerCompat.from(context)
-        val notificationIntent = Intent(context, notificationacitivity::class.java)
-        val pendingIntent =
-            PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        // Create an intent to stop the audio
-        val stopIntent = Intent(context, StopAudioReceiver::class.java)
-        val stopPendingIntent = PendingIntent.getBroadcast(
-            context,
-            0,
-            stopIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        
-
-        // Create a MediaStyle for the notification
-        val mediaStyle = androidx.media.app.NotificationCompat.MediaStyle()
-            .setMediaSession(null) // Set to null as there is no media session
-            .setShowCancelButton(true)
-            .setCancelButtonIntent(stopPendingIntent)
-
-        // Create the notification
-        val builder = NotificationCompat.Builder(context, ChannelID)
-            .setSmallIcon(R.drawable.colored_logo)
-            .setContentTitle(title)
-            .setContentText("Its time to take your $notificationText Medicine")
-            .setAutoCancel(true)
-            .setStyle(mediaStyle)
-            .addAction(
-                R.drawable.ic_stop,
-                "Stop Audio",
-                stopPendingIntent
-            )
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)
-
-        // Issue the notification
-        notificationManager.notify(notificationID, builder.build())
-
-        // Play audio
-        val mp = MediaPlayer.create(context, R.raw.alarm_audio)
-        mp.start()
+//        //new code to try
+//        val notificationManager = NotificationManagerCompat.from(context)
+//        val notificationIntent = Intent(context, notificationacitivity::class.java)
+//        val pendingIntent =
+//            PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//        // Create an intent to stop the audio
+//        val stopIntent = Intent(context, StopAudioReceiver::class.java)
+//        val stopPendingIntent = PendingIntent.getBroadcast(
+//            context,
+//            0,
+//            stopIntent,
+//            PendingIntent.FLAG_UPDATE_CURRENT
+//        )
+//
+//
+//        // Create a MediaStyle for the notification
+//        val mediaStyle = androidx.media.app.NotificationCompat.MediaStyle()
+//            .setMediaSession(null) // Set to null as there is no media session
+//            .setShowCancelButton(true)
+//            .setCancelButtonIntent(stopPendingIntent)
+//
+//        // Create the notification
+//        val builder = NotificationCompat.Builder(context, ChannelID)
+//            .setSmallIcon(R.drawable.colored_logo)
+//            .setContentTitle(title)
+//            .setContentText("Its time to take your $notificationText Medicine")
+//            .setAutoCancel(true)
+//            .setStyle(mediaStyle)
+//            .addAction(
+//                R.drawable.ic_stop,
+//                "Stop Audio",
+//                stopPendingIntent
+//            )
+//            .setPriority(NotificationCompat.PRIORITY_HIGH)
+//            .setContentIntent(pendingIntent)
+//
+//        // Issue the notification
+//        notificationManager.notify(notificationID, builder.build())
+//
+//        // Play audio
+//        val mp = MediaPlayer.create(context, R.raw.alarm_audio)
+//        mp.start()
     }
 }

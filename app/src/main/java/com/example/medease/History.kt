@@ -105,7 +105,7 @@ class History : AppCompatActivity() {
             for (document in querySnapshot) {
 
                 if (document != null) {
-                    Toast.makeText(this, "${document.id}", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(this, "${document.id}", Toast.LENGTH_SHORT).show()
                     val title = document.getString("tittle") ?: ""
                     val description = document.get("description") ?: ""
                     Log.d(

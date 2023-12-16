@@ -46,7 +46,7 @@ var video = true
 
     // Fill the temp token generated on Agora Console.
 // Fill the temp token generated on Agora Console.
-    val token = "007eJxTYIhUDhZRDJ0R87K7TjiEu8BG2SBbIz8m6kxf49ruHq+rnxUYLMyNk00NjQ0sUw1NTEzNTS2MUi0T04xTEg1NDBINzEx6dBJSGwIZGfQ2xzEzMkAgiM/O4Jua4ppYnMrAAAB0wxxZ"
+    val token = "007eJxTYLj2Muz9J8lbWafbJz35FT3xcqzn7rC5ea03pZw2+T2/ZP5agcHC3DjZ1NDYwDLV0MTE1NzUwijVMjHNOCXR0MQg0cDMJKyhJrUhkJFBL/s4MyMDBIL47Ay+qSmuicWpDAwAto8ixg=="
     //that identifies the local user.
 // An integer that identifies the local user.
     val uid = 0

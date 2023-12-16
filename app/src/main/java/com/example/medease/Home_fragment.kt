@@ -59,9 +59,11 @@ private lateinit var recyclerView: RecyclerView
             sideusername.text = "Hello!\n${FirebaseAuth.getInstance().currentUser?.displayName}"
         }
 
+        Signoutbutton.visibility = View.GONE
         Signoutbutton.setOnClickListener {
             signout()
         }
+
 
 
         view.findViewById<CardView>(R.id.medicationcard).setOnClickListener {
@@ -100,6 +102,9 @@ private lateinit var recyclerView: RecyclerView
                     Log.d("DocCatCrash","${document.toObject<Appointment>()}Error at 115")
                     appointmentlist.add(appointment)
                 }
+            }
+            if (appointmentlist.isEmpty()){
+                view?.findViewById<TextView>(R.id.upcoming_app_tv)?.visibility = View.GONE
             }
             val adapter = jJOINappointmentADAPTER(appointmentlist)
             recyclerView.adapter = adapter

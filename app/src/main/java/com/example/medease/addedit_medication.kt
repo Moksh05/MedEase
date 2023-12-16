@@ -417,13 +417,30 @@ class addedit_medication : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, myHours)
         calendar.set(Calendar.MINUTE, myMinutes)
+//for repeating but not exact
+//        alarmManager.setRepeating(
+//            AlarmManager.RTC_WAKEUP,
+//            calendar.timeInMillis,
+//            AlarmManager.INTERVAL_DAY,
+//            pendingIntent
+//        )
 
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // For Android M and later, use setExactAndAllowWhileIdle to ensure exact alarms
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        } else {
+            // For earlier versions, use setExact
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        }
 
         Toast.makeText(this, "Alarm Set Successful for $time and ${binding.MedicineName.text.toString()}", Toast.LENGTH_SHORT).show()
     }

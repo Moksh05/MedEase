@@ -62,7 +62,7 @@ class Home : AppCompatActivity() {
                 // Document exists, update it with the new data
                 docref.update("name",user?.displayName.toString())
                     .addOnSuccessListener {
-                        Toast.makeText(this,"Profile updated succesfuly",Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this,"Profile updated succesfuly",Toast.LENGTH_SHORT).show()
 
                     }
                     .addOnFailureListener { e ->
@@ -103,7 +103,7 @@ class Home : AppCompatActivity() {
                 }
                 R.id.menu_profile -> {
                     fragment = ProfileFragment()
-                    supportActionBar?.title = "Find Medical Facility"
+                    supportActionBar?.title = "Profile"
                 }
                 R.id.menu_appointments -> {
                     fragment = AppointmentFragment()

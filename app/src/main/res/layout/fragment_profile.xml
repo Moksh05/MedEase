@@ -42,6 +42,7 @@
                 android:layout_height="300dp"
                 android:gravity="center"
                 android:text="JS"
+
                 android:textColor="@color/colorPrimary_blue"
                 android:textSize="250dp"
                 android:textStyle="bold"></TextView>
@@ -194,6 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
                     android:text="Sign Out"

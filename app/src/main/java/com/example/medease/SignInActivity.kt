@@ -82,7 +82,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.signinWithGoogle.setOnClickListener {
-            Toast.makeText(this, "The logiun with google is working ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please Wait! Opening Google login", Toast.LENGTH_SHORT).show()
             signInwithgoogle()
         }
 

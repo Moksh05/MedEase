@@ -129,6 +129,7 @@ var editable= true
                 binding.addmedrecTittleEdittext.setText(MedRECInfo.Tittle)
                 binding.addmedrecDescEdittext.setText(MedRECInfo.Description)
                 binding.attachmentPreview.setText(MedRECInfo.fileName)
+                binding.attachmentPreview.visibility = View.VISIBLE
                 binding.attachmentview.visibility = View.VISIBLE
                 binding.backButtonMedrec.setOnClickListener {
                     onBackPressed()
@@ -136,7 +137,8 @@ var editable= true
             }
 
 
-        }else{
+        }
+        else{
             binding.doneButtonMedrec.setOnClickListener {
                 if (taskOngoing == 0){
                     adddata()
@@ -147,6 +149,8 @@ var editable= true
                 }
 
             }
+
+
 
             binding.attachMedicalRecordButton.setOnClickListener {
                 showfile()
@@ -162,6 +166,22 @@ var editable= true
                 taskOngoing = 1
                 uri = it.data?.data!!
 
+                val cursor = this@add_edit_medrec.contentResolver.query(it.data?.data!!, null, null, null, null)
+                cursor?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        displayName = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+                        binding.attachmentPreview.visibility = View.VISIBLE
+                        binding.attachmentview.visibility = View.VISIBLE
+                        binding.attachmentPreview.text = displayName
+
+                        // Proceed with Firestore document creation here
+
+
+                        taskOngoing =0
+
+                    }
+                }
+
                 // Upload the file to Firebase Storage
                 val uploadTask = storageref.child(uri.lastPathSegment.toString()).putFile(uri)
                 uploadTask.addOnSuccessListener { taskSnapshot ->
@@ -172,20 +192,7 @@ var editable= true
                         downloadUrl = downloadUri.toString()
 
                         // Get the display name using a cursor
-                        val cursor = this@add_edit_medrec.contentResolver.query(it.data?.data!!, null, null, null, null)
-                        cursor?.use { cursor ->
-                            if (cursor.moveToFirst()) {
-                                displayName = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                binding.attachmentPreview.visibility = View.VISIBLE
-                                binding.attachmentPreview.text = displayName
 
-                                // Proceed with Firestore document creation here
-
-
-                                taskOngoing =0
-
-                            }
-                        }
                     }
                 }
             }
@@ -210,11 +217,17 @@ var editable= true
     }
 
     private fun adddata(){
+
+
         medical = MedRec(
             binding.addmedrecTittleEdittext.text.toString(),
             binding.addmedrecDescEdittext.text.toString(),
             formatter.format(Date()), displayName, downloadUrl
         )
+
+        binding.attachmentview.visibility = View.VISIBLE
+        binding.attachmentPreview.visibility = View.VISIBLE
+        binding.attachmentPreview.setText(displayName)
     }
     private fun setdata(){
         collRef.document(binding.addmedrecTittleEdittext.text.toString())
