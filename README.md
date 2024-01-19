@@ -6,9 +6,8 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 1. [Overview](#overview)
 2. [Features](#features)
-3. [Screenshots](#screenshots)
-4. [Technologies Used](#technologies-used)
-
+3. [Technologies Used](#technologies-used)
+4. [Screenshots](#screenshots)
 
 
 ## Features
@@ -44,6 +43,26 @@ Welcome to MedEase, your go-to companion app for efficient health management and
    - Stay updated with the latest medical and health-related news.
    - Utilizes the NewsAPI to fetch articles, and displays them using Retrofit.
    - Incorporates Picasso library for efficient image loading.
+
+
+## Technologies Used
+
+- **Kotlin and Android Studio:**
+  - Developed using Kotlin programming language in Android Studio.
+
+- **Firebase:**
+  - Firestore database for data storage.
+  - Firebase Storage for file attachment.
+  - Firebase Authentication for user login.
+
+- **Agora Video Call SDK:**
+  - Enables secure and reliable video consultations.
+
+- **Razorpay API (Test Mode):**
+  - Implements a dummy payment system for testing purposes.
+
+- **Broadcast Receiver and Alarm Manager:**
+  - Used to schedule dosage reminders.
 
 ## Screenshots
 
@@ -86,12 +105,12 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 <p align="center">
   <img src="Screenshots/Screenshot_2023-11-23-21-50-59-893_com.example.medease.jpg" width="200" alt="Screenshot 5">
   <img src="Screenshots/Screenshot_2023-11-23-21-51-06-358_com.example.medease.jpg" width="200" alt="Screenshot 6">
-  <img src="Screenshots/Screenshot_2023-11-23-21-51-43-797_com.example.medease.jpg" width="200" alt="Screenshot 7">
-  <img src="Screenshots/Screenshot_2023-11-23-21-51-52-994_com.example.medease.jpg" width="200" alt="Screenshot 8">
+  <img src="Screenshots/WhatsApp Image 2024-01-19 at 19.27.21_df3eff16.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/WhatsApp Image 2024-01-19 at 19.27.21_df59f178.jpg" width="200" alt="Screenshot 8">
 </p>
 <p align="center">
   <img src="Screenshots/Screenshot_2023-11-23-22-19-22-072_com.example.medease.jpg" width="200" alt="Screenshot 5">
-  <img src="Screenshots/WhatsApp Image 2023-12-16 at 16.25.13_4989835c.jpg" alt="Screenshot 6">
+  <img src="Screenshots/WhatsApp Image 2023-12-16 at 16.25.13_4989835c.jpg" width="200" alt="Screenshot 6">
   <img src="Screenshots/Screenshot_2023-11-23-22-23-03-105_com.example.medease.jpg" width="200" alt="Screenshot 7">
 </p>
 
@@ -99,24 +118,7 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 <!-- Add more rows as needed -->
 
 
-## Technologies Used
 
-- **Kotlin and Android Studio:**
-  - Developed using Kotlin programming language in Android Studio.
-
-- **Firebase:**
-  - Firestore database for data storage.
-  - Firebase Storage for file attachment.
-  - Firebase Authentication for user login.
-
-- **Agora Video Call SDK:**
-  - Enables secure and reliable video consultations.
-
-- **Razorpay API (Test Mode):**
-  - Implements a dummy payment system for testing purposes.
-
-- **Broadcast Receiver and Alarm Manager:**
-  - Used to schedule dosage reminders.
 
 - **NewsAPI and Retrofit:**
   - Fetches and displays medical news articles.
