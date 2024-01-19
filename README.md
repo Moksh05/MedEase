@@ -47,11 +47,11 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 ## Screenshots
 
-![Screenshot 1](path/to/screenshot1.png)
-*Caption for Screenshot 1*
+![Screenshot 1](Screenshots/Screenshot_2023-11-23-21-46-58-992_com.example.medease.jpg)
+*Login Screen*
 
-![Screenshot 2](path/to/screenshot2.png)
-*Caption for Screenshot 2*
+![Screenshot 2](Screenshots/Screenshot_2023-11-23-21-47-01-892_com.example.medease.jpg)
+*SignUp Screen*
 
 
 ## Technologies Used
