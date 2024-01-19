@@ -63,6 +63,12 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 - **Broadcast Receiver and Alarm Manager:**
   - Used to schedule dosage reminders.
+    
+- **NewsAPI and Retrofit:**
+  - Fetches and displays medical news articles.
+
+- **Picasso Library:**
+  - Efficiently loads and displays images in the app.
 
 ## Screenshots
 
@@ -120,8 +126,3 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 
 
-- **NewsAPI and Retrofit:**
-  - Fetches and displays medical news articles.
-
-- **Picasso Library:**
-  - Efficiently loads and displays images in the app.
