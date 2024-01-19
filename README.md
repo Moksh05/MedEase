@@ -1,4 +1,7 @@
 # MedEase - Your Health Companion App
+<p align="left">
+  <img src="Screenshots/v987-18a.jpg" width="80" height="80" alt="Logo">
+</p>
 
 Welcome to MedEase, your go-to companion app for efficient health management and medical information. MedEase simplifies your healthcare routine by offering a range of features to track appointments, manage medications, connect with healthcare professionals, and stay updated with the latest medical news.
 
