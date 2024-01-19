@@ -47,8 +47,12 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 ## Screenshots
 
-![Screenshot 1](Screenshots/Screenshot_2023-11-23-21-46-58-992_com.example.medease.jpg)
-*Login Screen*
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-46-58-992_com.example.medease.jpg" width="300" alt="Login Screen">
+</p>
+<p align="center">
+  <em>Login Screen</em>
+</p>
 
 ![Screenshot 2](Screenshots/Screenshot_2023-11-23-21-47-01-892_com.example.medease.jpg)
 *SignUp Screen*
