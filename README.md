@@ -47,15 +47,56 @@ Welcome to MedEase, your go-to companion app for efficient health management and
 
 ## Screenshots
 
+## App Screenshots
+
+<!-- Row 1 -->
 <p align="center">
-  <img src="Screenshots/Screenshot_2023-11-23-21-46-58-992_com.example.medease.jpg" width="300" alt="Login Screen">
-</p>
-<p align="center">
-  <em>Login Screen</em>
+  <img src="Screenshots/Screenshot_2023-11-23-21-46-58-992_com.example.medease.jpg" width="200" alt="Screenshot 1">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-01-892_com.example.medease.jpg" width="200" alt="Screenshot 2">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-08-289_com.google.android.gms.jpg" width="200" alt="Screenshot 3">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-33-181_com.example.medease.jpg" width="200" alt="Screenshot 4">
 </p>
 
-![Screenshot 2](Screenshots/Screenshot_2023-11-23-21-47-01-892_com.example.medease.jpg)
-*SignUp Screen*
+<!-- Row 2 -->
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-40-721_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-46-703_com.example.medease.jpg" width="200" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-52-632_com.example.medease.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/Screenshot_2023-11-23-21-47-59-186_com.example.medease.jpg" width="200" alt="Screenshot 8">
+</p>
+
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-48-50-744_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/Screenshot_2023-11-23-21-49-17-567_com.example.medease.jpg" width="200" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-21-49-42-927_com.example.medease.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/Screenshot_2023-11-23-21-49-53-988_com.example.medease.jpg" width="200" alt="Screenshot 8">
+</p>
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-00-246_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-11-535_com.example.medease.jpg" width="200" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-15-928_com.example.medease.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-18-617_com.example.medease.jpg" width="200" alt="Screenshot 8">
+</p>
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-21-631_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-24-207_com.example.medease.jpg" width="200" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-29-274_com.example.medease.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-42-869_com.example.medease.jpg" width="200" alt="Screenshot 8">
+</p>
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-21-50-59-893_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/Screenshot_2023-11-23-21-51-06-358_com.example.medease.jpg" width="200" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-21-51-43-797_com.example.medease.jpg" width="200" alt="Screenshot 7">
+  <img src="Screenshots/Screenshot_2023-11-23-21-51-52-994_com.example.medease.jpg" width="200" alt="Screenshot 8">
+</p>
+<p align="center">
+  <img src="Screenshots/Screenshot_2023-11-23-22-19-22-072_com.example.medease.jpg" width="200" alt="Screenshot 5">
+  <img src="Screenshots/WhatsApp Image 2023-12-16 at 16.25.13_4989835c.jpg" alt="Screenshot 6">
+  <img src="Screenshots/Screenshot_2023-11-23-22-23-03-105_com.example.medease.jpg" width="200" alt="Screenshot 7">
+</p>
+
+
+<!-- Add more rows as needed -->
 
 
 ## Technologies Used
